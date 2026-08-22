@@ -1,5 +1,10 @@
 const Resume = require("../models/Resume");
-const { uploadFileToGridFS } = require("./fileService");
+
+const {
+    uploadFileToGridFS,
+    deleteFileFromGridFS,
+    downloadFileFromGridFS
+} = require("./fileService");
 const { extractResumeText } = require("./resumeParserService");
 const { matchResumeContent } = require("./resumeMatchingService");
 
@@ -8,10 +13,10 @@ const createUploadedResume = async (
     file,
     title
 ) => {
-    // 1. Upload PDF to GridFS
+   
     const uploadedFile = await uploadFileToGridFS(file);
 
-    // 2. Create Resume document
+    
     const resume = await Resume.create({
         studentId,
         title,
@@ -20,7 +25,7 @@ const createUploadedResume = async (
         isActive: false
     });
 
-    // 3. Extract text from uploaded PDF
+   
     const resumeText = await extractResumeText(file.buffer);
 
     console.log("Resume text extracted successfully");
@@ -37,7 +42,6 @@ const createUploadedResume = async (
         matchedContent.certifications
     );
 
-    // 5. Update Resume with matched records
     resume.projects = matchedContent.projects;
     resume.certifications = matchedContent.certifications;
 
@@ -60,9 +64,111 @@ const getResumeById = async (resumeId, studentId) => {
         .populate("projects")
         .populate("certifications");
 };
+const deleteResume = async (resumeId, studentId) => {
+    const resume = await Resume.findOne({
+        _id: resumeId,
+        studentId
+    });
 
+    if (!resume) {
+        return null;
+    }
+
+    // Delete PDF from GridFS
+    try {
+        await deleteFileFromGridFS(resume.fileId);
+    } catch (error) {
+        console.log(
+            "GridFS file could not be deleted:",
+            error.message
+        );
+    }
+
+    // Delete Resume document from MongoDB
+    await Resume.deleteOne({
+        _id: resumeId,
+        studentId
+    });
+
+    return resume;
+};
+
+const downloadResumeFile = async (resumeId, studentId) => {
+    const resume = await Resume.findOne({
+        _id: resumeId,
+        studentId
+    });
+
+    if (!resume) {
+        return null;
+    }
+
+    const downloadStream = await downloadFileFromGridFS(
+        resume.fileId
+    );
+
+    return {
+        resume,
+        downloadStream
+    };
+};
+const updateResumeById = async (
+    resumeId,
+    studentId,
+    title
+) => {
+    return await Resume.findOneAndUpdate(
+        {
+            _id: resumeId,
+            studentId: studentId
+        },
+        {
+            title: title
+        },
+        {
+            new: true,
+            runValidators: true
+        }
+    )
+        .populate("projects")
+        .populate("certifications");
+};
+const activateResume = async (resumeId, studentId) => {
+    // 1. Check whether the resume belongs to the student
+    const resume = await Resume.findOne({
+        _id: resumeId,
+        studentId
+    });
+
+    if (!resume) {
+        return null;
+    }
+
+    // 2. Deactivate all resumes of this student
+    await Resume.updateMany(
+        {
+            studentId
+        },
+        {
+            isActive: false
+        }
+    );
+
+    // 3. Activate the selected resume
+    resume.isActive = true;
+
+    await resume.save();
+
+    return await Resume.findById(resumeId)
+        .populate("projects")
+        .populate("certifications");
+};
 module.exports = {
     createUploadedResume,
     getResumesByStudent,
-    getResumeById
+    getResumeById,
+    updateResumeById,
+    deleteResume,
+    downloadResumeFile,
+    activateResume
 };

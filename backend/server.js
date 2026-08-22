@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ quiet: true });
 
 const connectDB = require("./src/config/db");
 const app = require("./src/app");
