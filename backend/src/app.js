@@ -6,6 +6,8 @@ const authRoutes = require("./routes/authRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const certificationRoutes = require("./routes/certificationRoutes");
 const codingProfileRoutes = require("./routes/codingProfileRoutes");
+const codingProblemRoutes = require("./routes/codingProblemRoutes");
+const resumeRoutes = require("./routes/resumeRoutes");
 
 const app = express();
 
@@ -36,6 +38,12 @@ app.use("/api/v1/certifications", certificationRoutes);
 
 // Coding Profile Routes
 app.use("/api/v1/coding-profiles", codingProfileRoutes);
+
+// Coding Problem Routes
+app.use("/api/v1/coding-problems", codingProblemRoutes);
+
+// Resume Routes
+app.use("/api/v1/resumes", resumeRoutes);
 
 
 module.exports = app;

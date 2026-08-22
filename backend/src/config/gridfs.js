@@ -1,0 +1,23 @@
+const mongoose = require("mongoose");
+const { GridFSBucket } = require("mongodb");
+
+let gridFSBucket;
+
+const getGridFSBucket = () => {
+    if (!gridFSBucket) {
+        if (mongoose.connection.readyState !== 1) {
+            throw new Error("MongoDB is not connected");
+        }
+
+        gridFSBucket = new GridFSBucket(
+            mongoose.connection.db,
+            {
+                bucketName: "resumes"
+            }
+        );
+    }
+
+    return gridFSBucket;
+};
+
+module.exports = getGridFSBucket;
