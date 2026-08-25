@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const studentSchema = new mongoose.Schema(
     {
+
+
         name: {
             type: String,
             required: true,
@@ -25,6 +27,8 @@ const studentSchema = new mongoose.Schema(
             type: String,
             default: null
         },
+
+
 
         profile: {
             phone: {
@@ -53,8 +57,43 @@ const studentSchema = new mongoose.Schema(
 
             github: {
                 type: String
+            },
+
+            linkedin: {
+                type: String
+            },
+
+            class12: {
+                school: {
+                    type: String
+                },
+
+                percentage: {
+                    type: Number
+                },
+
+                passingYear: {
+                    type: Number
+                }
+            },
+
+
+
+            class10: {
+                school: {
+                    type: String
+                },
+
+                percentage: {
+                    type: Number
+                },
+
+                passingYear: {
+                    type: Number
+                }
             }
         },
+
 
         skills: [
             {
@@ -72,6 +111,35 @@ const studentSchema = new mongoose.Schema(
             }
         ],
 
+
+
+        achievements: [
+            {
+                title: {
+                    type: String,
+                    required: true,
+                    trim: true
+                },
+
+                description: {
+                    type: String,
+                    trim: true
+                },
+
+                date: {
+                    type: Date
+                },
+
+                link: {
+                    type: String,
+                    default: null,
+                    trim: true
+                }
+            }
+        ],
+
+   
+
         targetCompanies: [
             {
                 companyName: {
@@ -86,9 +154,6 @@ const studentSchema = new mongoose.Schema(
             }
         ]
     },
-    {
-        timestamps: true
-    }
 );
 
 const Student = mongoose.model("Student", studentSchema);

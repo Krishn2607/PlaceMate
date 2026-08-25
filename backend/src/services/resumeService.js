@@ -8,6 +8,8 @@ const {
 const { extractResumeText } = require("./resumeParserService");
 const { matchResumeContent } = require("./resumeMatchingService");
 const { analyzeResumeWithAI } = require("./resumeAIService");
+
+
 const createUploadedResume = async (
     studentId,
     file,
@@ -163,7 +165,14 @@ const activateResume = async (resumeId, studentId) => {
         .populate("projects")
         .populate("certifications");
 };
-const analyzeResume = async (resumeId, studentId) => {
+
+
+const analyzeResume = async (
+    resumeId,
+    studentId,
+    targetRole
+) => {
+
     const resume = await Resume.findOne({
         _id: resumeId,
         studentId
@@ -171,6 +180,10 @@ const analyzeResume = async (resumeId, studentId) => {
 
     if (!resume) {
         return null;
+    }
+
+    if (!targetRole || !targetRole.trim()) {
+        throw new Error("Target role is required");
     }
 
     // Get PDF from GridFS
@@ -187,36 +200,38 @@ const analyzeResume = async (resumeId, studentId) => {
 
     const pdfBuffer = Buffer.concat(chunks);
 
-    // Extract text from PDF
-    const resumeText = await extractResumeText(pdfBuffer);
-
-    if (!resumeText || !resumeText.trim()) {
-        throw new Error("Could not extract text from resume");
-    }
-
-    console.log("Resume text extracted for AI analysis");
-
-    // Send resume text to AI
-    const aiAnalysis = await analyzeResumeWithAI(
-        resumeText
+   
+    const resumeText = await extractResumeText(
+        pdfBuffer
     );
 
-    console.log("AI resume analysis completed");
+    if (!resumeText || !resumeText.trim()) {
+        throw new Error(
+            "Could not extract text from resume"
+        );
+    }
 
-    // Save AI result
-    resume.atsScore = aiAnalysis.atsScore;
+    console.log(
+        "Resume text extracted for AI analysis"
+    );
 
-    resume.aiAnalysis = {
-        summary: aiAnalysis.summary,
-        strengths: aiAnalysis.strengths,
-        weaknesses: aiAnalysis.weaknesses,
-        missingSkills: aiAnalysis.missingSkills,
-        suggestions: aiAnalysis.suggestions
+    // Send resume text + target role to AI
+    const aiAnalysis = await analyzeResumeWithAI(
+        resumeText,
+        targetRole
+    );
+
+    console.log(
+        "AI resume analysis completed"
+    );
+
+
+
+    return {
+        resumeId: resume._id,
+        targetRole,
+        analysis: aiAnalysis
     };
-
-    await resume.save();
-
-    return resume;
 };
 
 module.exports = {

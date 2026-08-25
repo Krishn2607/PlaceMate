@@ -174,12 +174,23 @@ const downloadResume = async (req, res) => {
 
 const analyzeResume = async (req, res) => {
     try {
-        const resume = await resumeService.analyzeResume(
-            req.params.id,
-            req.student.id
-        );
 
-        if (!resume) {
+        const { targetRole } = req.body;
+
+        if (!targetRole) {
+            return res.status(400).json({
+                message: "Target role is required"
+            });
+        }
+
+        const analysis =
+            await resumeService.analyzeResume(
+                req.params.id,
+                req.student.id,
+                targetRole
+            );
+
+        if (!analysis) {
             return res.status(404).json({
                 message: "Resume not found"
             });
@@ -187,11 +198,15 @@ const analyzeResume = async (req, res) => {
 
         res.status(200).json({
             message: "Resume analyzed successfully",
-            resume
+            ...analysis
         });
 
     } catch (error) {
-        console.error("Analyze resume error:", error);
+
+        console.error(
+            "Analyze resume error:",
+            error
+        );
 
         res.status(500).json({
             message: "Failed to analyze resume",
