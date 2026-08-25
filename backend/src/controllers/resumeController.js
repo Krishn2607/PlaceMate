@@ -171,6 +171,34 @@ const downloadResume = async (req, res) => {
         });
     }
 };
+
+const analyzeResume = async (req, res) => {
+    try {
+        const resume = await resumeService.analyzeResume(
+            req.params.id,
+            req.student.id
+        );
+
+        if (!resume) {
+            return res.status(404).json({
+                message: "Resume not found"
+            });
+        }
+
+        res.status(200).json({
+            message: "Resume analyzed successfully",
+            resume
+        });
+
+    } catch (error) {
+        console.error("Analyze resume error:", error);
+
+        res.status(500).json({
+            message: "Failed to analyze resume",
+            error: error.message
+        });
+    }
+};
 const activateResume = async (req, res) => {
     try {
         const resume = await resumeService.activateResume(
@@ -205,6 +233,7 @@ module.exports = {
     updateResume,
     deleteResume,
     downloadResume,
-    activateResume
+    activateResume,
+    analyzeResume
   
 };

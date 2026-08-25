@@ -7,7 +7,7 @@ const {
 } = require("./fileService");
 const { extractResumeText } = require("./resumeParserService");
 const { matchResumeContent } = require("./resumeMatchingService");
-
+const { analyzeResumeWithAI } = require("./resumeAIService");
 const createUploadedResume = async (
     studentId,
     file,
@@ -163,6 +163,62 @@ const activateResume = async (resumeId, studentId) => {
         .populate("projects")
         .populate("certifications");
 };
+const analyzeResume = async (resumeId, studentId) => {
+    const resume = await Resume.findOne({
+        _id: resumeId,
+        studentId
+    });
+
+    if (!resume) {
+        return null;
+    }
+
+    // Get PDF from GridFS
+    const downloadStream = await downloadFileFromGridFS(
+        resume.fileId
+    );
+
+    // Collect PDF data into a Buffer
+    const chunks = [];
+
+    for await (const chunk of downloadStream) {
+        chunks.push(chunk);
+    }
+
+    const pdfBuffer = Buffer.concat(chunks);
+
+    // Extract text from PDF
+    const resumeText = await extractResumeText(pdfBuffer);
+
+    if (!resumeText || !resumeText.trim()) {
+        throw new Error("Could not extract text from resume");
+    }
+
+    console.log("Resume text extracted for AI analysis");
+
+    // Send resume text to AI
+    const aiAnalysis = await analyzeResumeWithAI(
+        resumeText
+    );
+
+    console.log("AI resume analysis completed");
+
+    // Save AI result
+    resume.atsScore = aiAnalysis.atsScore;
+
+    resume.aiAnalysis = {
+        summary: aiAnalysis.summary,
+        strengths: aiAnalysis.strengths,
+        weaknesses: aiAnalysis.weaknesses,
+        missingSkills: aiAnalysis.missingSkills,
+        suggestions: aiAnalysis.suggestions
+    };
+
+    await resume.save();
+
+    return resume;
+};
+
 module.exports = {
     createUploadedResume,
     getResumesByStudent,
@@ -170,5 +226,6 @@ module.exports = {
     updateResumeById,
     deleteResume,
     downloadResumeFile,
-    activateResume
+    activateResume,
+    analyzeResume
 };
