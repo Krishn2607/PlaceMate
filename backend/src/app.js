@@ -1,5 +1,4 @@
 const express = require("express");
-
 const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
@@ -11,14 +10,17 @@ const resumeRoutes = require("./routes/resumeRoutes");
 
 const app = express();
 
+// Request logger
+app.use((req, res, next) => {
+    console.log("REQUEST:", req.method, req.originalUrl);
+    next();
+});
+
 // Middleware
-
 app.use(cors());
-
 app.use(express.json());
 
 // Test Route
-
 app.get("/", (req, res) => {
     res.json({
         message: "PlaceMate Backend is running!"
@@ -26,11 +28,9 @@ app.get("/", (req, res) => {
 });
 
 // Authentication Routes
-
 app.use("/api/v1/auth", authRoutes);
 
 // Project Routes
-
 app.use("/api/v1/projects", projectRoutes);
 
 // Certification Routes
@@ -44,6 +44,5 @@ app.use("/api/v1/coding-problems", codingProblemRoutes);
 
 // Resume Routes
 app.use("/api/v1/resumes", resumeRoutes);
-
 
 module.exports = app;

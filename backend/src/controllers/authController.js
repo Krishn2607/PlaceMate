@@ -113,8 +113,80 @@ const getMe = async (req, res) => {
         });
     }
 };
+const updateProfile = async (req, res) => {
+    try {
+        const {
+            phone,
+            college,
+            branch,
+            semester,
+            cgpa,
+            graduationYear,
+            github,
+            skills,
+            achievements
+        } = req.body;
+
+        const student = await Student.findById(
+            req.student.id
+        );
+
+        if (!student) {
+            return res.status(404).json({
+                message: "Student not found"
+            });
+        }
+
+        // Update profile
+        student.profile = {
+            phone,
+            college,
+            branch,
+            semester,
+            cgpa,
+            graduationYear,
+            github
+        };
+
+        // Update skills
+        if (Array.isArray(skills)) {
+            student.skills = skills;
+        }
+
+        // Update achievements
+        if (Array.isArray(achievements)) {
+            student.achievements = achievements;
+        }
+
+        await student.save();
+
+        res.status(200).json({
+            message: "Student profile updated successfully",
+            student: {
+                id: student._id,
+                name: student.name,
+                email: student.email,
+                profile: student.profile,
+                skills: student.skills,
+                achievements: student.achievements
+            }
+        });
+
+    } catch (error) {
+        console.error(
+            "Update profile error:",
+            error
+        );
+
+        res.status(500).json({
+            message: "Failed to update student profile",
+            error: error.message
+        });
+    }
+};
 module.exports = {
     register,
     login,
-    getMe
+    getMe,
+    updateProfile
 };

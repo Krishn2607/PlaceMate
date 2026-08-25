@@ -8,7 +8,8 @@ const {
     deleteResume,
     downloadResume,
     activateResume,
-    analyzeResume
+    analyzeResume,  
+    generateResume
 } = require("../controllers/resumeController");
 
 const protect = require("../middleware/authMiddleware");
@@ -84,6 +85,11 @@ router.post(
     analyzeResume
 );
 
+router.post(
+    "/generate",
+    protect,
+    generateResume
+);
 
 // Get Single Resume
 router.get(

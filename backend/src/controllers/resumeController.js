@@ -214,6 +214,64 @@ const analyzeResume = async (req, res) => {
         });
     }
 };
+
+const generateResume = async (req, res) => {
+    try {
+        const {
+            projectIds,
+            certificationIds,
+            targetRole
+        } = req.body;
+
+        // Validate target role
+        if (!targetRole) {
+            return res.status(400).json({
+                message: "Target role is required"
+            });
+        }
+
+        // Validate projects
+        if (!Array.isArray(projectIds)) {
+            return res.status(400).json({
+                message: "projectIds must be an array"
+            });
+        }
+
+        // Validate certifications
+        if (!Array.isArray(certificationIds)) {
+            return res.status(400).json({
+                message: "certificationIds must be an array"
+            });
+        }
+
+        const generatedResume = await resumeService.generateResume(
+            req.student.id,
+            projectIds,
+            certificationIds,
+            targetRole
+        );
+
+        if (!generatedResume) {
+            return res.status(404).json({
+                message: "Student not found"
+            });
+        }
+
+        res.status(200).json({
+            message: "Resume generated successfully",
+            resume: generatedResume
+        });
+
+    } catch (error) {
+        console.error("Generate resume error:", error);
+
+        res.status(500).json({
+            message: "Failed to generate resume",
+            error: error.message
+        });
+    }
+};
+
 const activateResume = async (req, res) => {
     try {
         const resume = await resumeService.activateResume(
@@ -249,6 +307,7 @@ module.exports = {
     deleteResume,
     downloadResume,
     activateResume,
-    analyzeResume
+    analyzeResume,
+    generateResume
   
 };
