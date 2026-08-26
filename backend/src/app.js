@@ -9,6 +9,7 @@ const codingProblemRoutes = require("./routes/codingProblemRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 const weeklyPlanRoutes = require("./routes/weeklyPlanRoutes");
+const progressSnapshotRoutes = require("./routes/progressSnapshotRoutes");
 
 const app = express();
 
@@ -52,5 +53,8 @@ app.use("/api/v1/resumes", resumeRoutes);
 
 // Weekly Plan Routes
 app.use( "/api/v1/weekly-plans", weeklyPlanRoutes);
+
+// Progress Snapshot Routes
+app.use("/api/v1/progress-snapshots",progressSnapshotRoutes);
 
 module.exports = app;
