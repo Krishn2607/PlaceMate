@@ -7,6 +7,8 @@ const certificationRoutes = require("./routes/certificationRoutes");
 const codingProfileRoutes = require("./routes/codingProfileRoutes");
 const codingProblemRoutes = require("./routes/codingProblemRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
+const studentRoutes = require("./routes/studentRoutes");
+const weeklyPlanRoutes = require("./routes/weeklyPlanRoutes");
 
 const app = express();
 
@@ -27,6 +29,9 @@ app.get("/", (req, res) => {
     });
 });
 
+// Student Routes
+app.use("/api/v1/students", studentRoutes);
+
 // Authentication Routes
 app.use("/api/v1/auth", authRoutes);
 
@@ -44,5 +49,8 @@ app.use("/api/v1/coding-problems", codingProblemRoutes);
 
 // Resume Routes
 app.use("/api/v1/resumes", resumeRoutes);
+
+// Weekly Plan Routes
+app.use( "/api/v1/weekly-plans", weeklyPlanRoutes);
 
 module.exports = app;
