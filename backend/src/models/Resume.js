@@ -50,6 +50,20 @@ aiAnalysis: {
     suggestions: {
         type: [String],
         default: []
+    },
+
+    aiEraReadiness: {
+        score: {
+            type: Number,
+            default: 0,
+            min: 0,
+            max: 100
+        },
+
+        assessment: {
+            type: String,
+            default: ""
+        }
     }
 },
 

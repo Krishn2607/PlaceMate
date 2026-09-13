@@ -32,6 +32,7 @@ const {
 
 
 
+// CREATE UPLOADED RESUME
 const createUploadedResume = async (
     studentId,
     file,
@@ -86,6 +87,8 @@ const createUploadedResume = async (
 
 
 
+
+// GET ALL RESUMES
 const getResumesByStudent = async (
     studentId
 ) => {
@@ -99,6 +102,7 @@ const getResumesByStudent = async (
 
 
 
+// GET RESUME BY ID
 const getResumeById = async (
     resumeId,
     studentId
@@ -113,6 +117,9 @@ const getResumeById = async (
 };
 
 
+
+
+// DELETE RESUME
 const deleteResume = async (
     resumeId,
     studentId
@@ -147,12 +154,13 @@ const deleteResume = async (
         _id: resumeId,
         studentId
     });
-
     return resume;
 };
 
 
 
+
+// DOWNLOAD RESUME FILE
 const downloadResumeFile = async (
     resumeId,
     studentId
@@ -167,8 +175,7 @@ const downloadResumeFile = async (
         return null;
     }
 
-    const downloadStream =
-        await downloadFileFromGridFS(
+    const downloadStream =await downloadFileFromGridFS(
             resume.fileId
         );
 
@@ -180,6 +187,8 @@ const downloadResumeFile = async (
 
 
 
+
+// UPDATE RESUME TITLE
 const updateResumeById = async (
     resumeId,
     studentId,
@@ -205,6 +214,8 @@ const updateResumeById = async (
 
 
 
+
+// ACTIVATE RESUME
 const activateResume = async (
     resumeId,
     studentId
@@ -235,24 +246,20 @@ const activateResume = async (
 
     await resume.save();
 
-    return await Resume.findById(
-        resumeId
-    )
+    return await Resume.findById(resumeId )
         .populate("projects")
         .populate("certifications");
 };
 
 
-// =====================================================
-// ANALYZE RESUME WITH AI
-// =====================================================
 
+
+// ANALYZE RESUME WITH AI
 const analyzeResume = async (
     resumeId,
     studentId,
     targetRole
 ) => {
-
     const resume = await Resume.findOne({
         _id: resumeId,
         studentId
@@ -262,27 +269,21 @@ const analyzeResume = async (
         return null;
     }
 
-    if (
-        !targetRole ||
-        !targetRole.trim()
-    ) {
+    if (!targetRole ||!targetRole.trim()) {
         throw new Error(
             "Target role is required"
         );
     }
 
     // Get PDF from GridFS
-    const downloadStream =
-        await downloadFileFromGridFS(
+    const downloadStream =await downloadFileFromGridFS(
             resume.fileId
         );
 
     // Collect PDF chunks
     const chunks = [];
 
-    for await (
-        const chunk of downloadStream
-    ) {
+    for await (const chunk of downloadStream) {
         chunks.push(chunk);
     }
 
@@ -291,17 +292,11 @@ const analyzeResume = async (
 
     // Extract text
     const resumeText =
-        await extractResumeText(
-            pdfBuffer
-        );
+        await extractResumeText(pdfBuffer);
 
-    if (
-        !resumeText ||
-        !resumeText.trim()
-    ) {
-        throw new Error(
-            "Could not extract text from resume"
-        );
+    if (!resumeText || !resumeText.trim())
+        {
+        throw new Error("Could not extract text from resume");
     }
 
     console.log(
@@ -309,29 +304,67 @@ const analyzeResume = async (
     );
 
     // Analyze using AI
-    const aiAnalysis =
+    const analysis =
         await analyzeResumeWithAI(
             resumeText,
             targetRole
         );
+    // SAVE ATS SCORE
+    resume.atsScore =
+        analysis.atsScore;
+
+    // SAVE AI ANALYSIS
+    resume.aiAnalysis = {
+
+        summary:
+            analysis.summary,
+
+        strengths:
+            analysis.strengths,
+
+        // AI service currently does not return
+        // a separate weaknesses field.
+        weaknesses: [],
+
+        missingSkills:
+            analysis.missingSkills,
+
+        // Map AI "improvements"
+        // to Resume "suggestions"
+        suggestions:
+            analysis.improvements,
+
+        // Store AI-era readiness inside
+        // aiAnalysis
+        aiEraReadiness: {
+
+            score:
+                analysis.aiEraReadiness.score,
+
+            assessment:
+                analysis.aiEraReadiness.assessment
+        }
+    };
+
+    // Save changes to MongoDB
+    await resume.save();
 
     console.log(
-        "AI resume analysis completed"
+        "AI resume analysis completed and saved"
     );
 
-    // IMPORTANT:
-    // Analysis is NOT saved to Resume.
-    // We only return it.
-
+    // Return analysis to client
     return {
         resumeId: resume._id,
         targetRole,
-        analysis: aiAnalysis
+        analysis
     };
 };
 
 
 
+
+// GENERATE RESUME WITH AI
 const generateResume = async (
     studentId,
     projectIds,
@@ -339,18 +372,15 @@ const generateResume = async (
     targetRole
 ) => {
 
-
     const student =
         await Student.findById(
             studentId
         );
-
     if (!student) {
         return null;
     }
 
-
-
+    // Get student's selected projects
     const projects =
         await Project.find({
             _id: {
@@ -359,9 +389,7 @@ const generateResume = async (
             studentId
         });
 
-
-
-
+    // Get student's selected certifications
     const certifications =
         await Certification.find({
             _id: {
@@ -370,13 +398,9 @@ const generateResume = async (
             studentId
         });
 
-
-
-
     console.log(
         "Generating resume content with AI..."
     );
-
     const generatedResume =
         await generateResumeWithAI({
             student,
@@ -384,41 +408,33 @@ const generateResume = async (
             certifications,
             targetRole
         });
-
     console.log(
         "AI resume content generated successfully"
     );
 
 
- 
 
+
+    // PREPARE RESUME DATA FOR PDF
     const resumeData = {
-
-        name: student.name,
-
-        email: student.email,
-
+        name:
+            student.name,
+        email:
+            student.email,
         phone:
             student.profile?.phone || "",
-
         github:
             student.profile?.github || "",
-
         professionalSummary:
             generatedResume.professionalSummary,
-
         education:
             generatedResume.education,
-
         skills:
             generatedResume.skills,
-
         projects:
             generatedResume.projects,
-
         certifications:
             generatedResume.certifications,
-
         achievements:
             generatedResume.achievements
     };
@@ -426,6 +442,7 @@ const generateResume = async (
 
 
 
+    // GENERATE PDF
     console.log(
         "Generating resume PDF..."
     );
@@ -434,81 +451,50 @@ const generateResume = async (
         await generateResumePDF(
             resumeData
         );
-
     console.log(
         "Resume PDF generated successfully"
     );
 
 
-  
-   
 
+
+    // CREATE FILE OBJECT
     const file = {
-
-        buffer: pdfBuffer,
-
+        buffer:
+            pdfBuffer,
         originalname:
-            `${targetRole.replace(
-                /[^a-zA-Z0-9]/g,
-                "_"
-            )}_Resume.pdf`,
-
+             `${targetRole.replace( /[^a-zA-Z0-9]/g, "_")}_Resume.pdf`,
         mimetype:
             "application/pdf"
     };
 
 
 
-    //  upload generated PDF to GridFS
-   
 
+    // UPLOAD GENERATED PDF TO GRIDFS
     console.log(
         "Uploading generated resume to GridFS..."
     );
 
     const uploadedFile =
-        await uploadFileToGridFS(
-            file
-        );
-
+        await uploadFileToGridFS(file);
     console.log(
         "Generated resume uploaded to GridFS"
     );
 
-
-    
-    //save generated resume using EXISTING model
-   
-
+// SAVE RESUME DOCUMENT IN MONGODB
     const resume =
         await Resume.create({
-
             studentId,
-
-            title:
-                `${targetRole} Resume`,
-
-            fileId:
-                uploadedFile.fileId,
-
+            title:`${targetRole} Resume`,
+            fileId:uploadedFile.fileId,
             atsScore: 0,
-
             isActive: false,
-
             projects:
-                projects.map(
-                    project => project._id
-                ),
-
+                projects.map(project =>project._id),
             certifications:
-                certifications.map(
-                    certification =>
-                        certification._id
-                )
+                certifications.map(certification =>certification._id)
         });
-
-
-
 
     return await Resume.findById(
         resume._id
@@ -518,26 +504,14 @@ const generateResume = async (
 };
 
 
-
-
 module.exports = {
-
     createUploadedResume,
-
     getResumesByStudent,
-
     getResumeById,
-
     updateResumeById,
-
     deleteResume,
-
     downloadResumeFile,
-
     activateResume,
-
     analyzeResume,
-
     generateResume
-
 };
