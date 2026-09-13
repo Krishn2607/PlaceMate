@@ -37,30 +37,36 @@ const progressSnapshotSchema = new mongoose.Schema(
         },
 
         codingStats: [
-            {
-                platform: {
-                    type: String,
-                    enum: [
-                        "LeetCode",
-                        "Codeforces",
-                        "CodeChef",
-                        "HackerRank"
-                    ],
-                    required: true
-                },
+        {
+            codingProfileId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "CodingProfile",
+                required: true
+            },
 
-                problemsSolved: {
-                    type: Number,
-                    default: 0,
-                    min: 0
-                },
+            platform: {
+                type: String,
+                enum: [
+                    "LeetCode",
+                    "Codeforces",
+                    "CodeChef",
+                    "HackerRank"
+                ],
+                required: true
+            },
 
-                rating: {
-                    type: Number,
-                    default: 0,
-                    min: 0
-                }
+            problemsSolved: {
+                type: Number,
+                default: 0,
+                min: 0
+            },
+
+            rating: {
+                type: Number,
+                default: 0,
+                min: 0
             }
+        }
         ],
 
         atsScore: {

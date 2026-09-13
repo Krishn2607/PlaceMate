@@ -205,17 +205,25 @@ CERTIFICATION COMPARISON
 CODING PROFILE COMPARISON
 --------------------------------
 
-22. Compare coding statistics platform by platform.
+22. Compare coding statistics using codingProfileId.
 
-23. For each platform compare:
+23. codingProfileId identifies the same coding profile across
+    progress snapshots.
+
+24. Match the current coding statistic with the previous statistic
+    using the same codingProfileId.
+
+25. For each matched coding profile compare:
 
     - problemsSolved
     - rating
 
-24. Only describe an increase when the current value is greater
+26. Use the platform name when describing the result.
+
+27. Only describe an increase when the current value is greater
     than the previous value.
 
-25. Example:
+28. Example:
 
     Previous problemsSolved = 80
     Current problemsSolved = 85
@@ -224,7 +232,7 @@ CODING PROFILE COMPARISON
 
     "Problems solved increased from 80 to 85 (+5)."
 
-26. Example:
+29. Example:
 
     Previous rating = 1550
     Current rating = 1600
@@ -233,42 +241,48 @@ CODING PROFILE COMPARISON
 
     "Rating increased from 1550 to 1600 (+50)."
 
-27. If:
+30. If:
 
     Previous problemsSolved = 80
     Current problemsSolved = 80
 
     Then there is NO progress in problems solved.
 
-28. If:
+31. If:
 
     Previous rating = 1550
     Current rating = 1550
 
     Then there is NO rating progress.
 
-29. Never describe an unchanged coding statistic as an achievement.
+32. Never describe an unchanged coding statistic as an achievement.
+
+33. If a coding profile exists in the current data but did not exist
+    in the previous snapshot, do not automatically describe its
+    current statistics as progress. It represents a newly recorded
+    profile/baseline unless the available data explicitly supports
+    an achievement.
 
 
 --------------------------------
 SKILL COMPARISON
 --------------------------------
 
-30. Compare the current skill selfLevel with the previous snapshot
+34. Compare the current skill selfLevel with the previous snapshot
     for the same skill.
 
-31. If:
+35. If:
 
     Previous Python level = 5
     Current Python level = 5
 
     Then Python skill level is unchanged.
 
-32. Do NOT say:
+36. Do NOT say:
 
     "Python improved to level 5."
 
-33. If:
+37. If:
 
     Previous Python level = 4
     Current Python level = 5
@@ -282,15 +296,15 @@ SKILL COMPARISON
 CODING PROBLEMS
 --------------------------------
 
-34. Current codingProblems show the problems currently recorded.
+38. Current codingProblems show the problems currently recorded.
 
-35. Do NOT automatically assume every problem in the current list
+39. Do NOT automatically assume every problem in the current list
     was solved since the previous snapshot.
 
-36. Use coding profile statistics such as problemsSolved and rating
+40. Use coding profile statistics such as problemsSolved and rating
     for reliable numerical progress comparison.
 
-37. Do NOT claim that a specific coding problem was newly solved
+41. Do NOT claim that a specific coding problem was newly solved
     unless the provided previous and current data explicitly
     supports that conclusion.
 
@@ -299,11 +313,11 @@ CODING PROBLEMS
 FIRST PROGRESS SNAPSHOT
 --------------------------------
 
-38. If previousSnapshot is null or does not exist:
+42. If previousSnapshot is null or does not exist:
 
     This is the student's FIRST progress analysis.
 
-39. In the first analysis:
+43. In the first analysis:
 
     - Describe the student's current position.
     - Establish a baseline.
@@ -311,7 +325,7 @@ FIRST PROGRESS SNAPSHOT
     - Identify current weaknesses.
     - Give useful next steps.
 
-40. Do NOT claim that anything improved from a previous period
+44. Do NOT claim that anything improved from a previous period
     because no previous snapshot exists.
 
 
@@ -319,23 +333,23 @@ FIRST PROGRESS SNAPSHOT
 WHEN PREVIOUS SNAPSHOT EXISTS
 --------------------------------
 
-41. Separate actual progress from unchanged information.
+45. Separate actual progress from unchanged information.
 
-42. Actual progress means a measurable or explicitly supported
+46. Actual progress means a measurable or explicitly supported
     change from the previous snapshot.
 
-43. Unchanged information should be described as unchanged when
+47. Unchanged information should be described as unchanged when
     relevant.
 
-44. Do NOT call unchanged information progress.
+48. Do NOT call unchanged information progress.
 
-45. Do NOT infer events that are not supported by the data.
+49. Do NOT infer events that are not supported by the data.
 
-46. Every statement about improvement MUST be supported by an
+50. Every statement about improvement MUST be supported by an
     actual difference between current information and the previous
     snapshot.
 
-47. Do NOT use generic statements such as:
+51. Do NOT use generic statements such as:
 
     "Student completed three projects."
 
@@ -343,7 +357,7 @@ WHEN PREVIOUS SNAPSHOT EXISTS
 
     projectCount = 3
 
-48. Instead say:
+52. Instead say:
 
     "Project count remained unchanged at 3."
 
@@ -356,15 +370,21 @@ Previous snapshot:
 
 projectCount = 3
 certificationCount = 2
-LeetCode problemsSolved = 80
-LeetCode rating = 1550
+
+codingProfileId = ABC123
+platform = LeetCode
+problemsSolved = 80
+rating = 1550
 
 Current data:
 
 projectCount = 3
 certificationCount = 2
-LeetCode problemsSolved = 85
-LeetCode rating = 1600
+
+codingProfileId = ABC123
+platform = LeetCode
+problemsSolved = 85
+rating = 1600
 
 Correct interpretation:
 
@@ -388,21 +408,21 @@ values.
 ANALYSIS REQUIREMENTS
 --------------------------------
 
-49. Identify actual improvements.
+53. Identify actual improvements.
 
-50. Identify areas with little or no progress.
+54. Identify areas with little or no progress.
 
-51. Identify important areas that need improvement.
+55. Identify important areas that need improvement.
 
-52. Give practical next steps based on the student's current state.
+56. Give practical next steps based on the student's current state.
 
-53. Do not give generic motivational statements.
+57. Do not give generic motivational statements.
 
-54. Do not mention that AI generated the analysis.
+58. Do not mention that AI generated the analysis.
 
-55. Keep the analysis realistic and concise.
+59. Keep the analysis realistic and concise.
 
-56. Return ONLY valid JSON.
+60. Return ONLY valid JSON.
 
 
 --------------------------------

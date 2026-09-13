@@ -90,13 +90,12 @@ const generateProgressSnapshot = async (studentId) => {
 
 
     //Prepare current coding stats
-    const codingStats = codingProfiles.map(
-        profile => ({
-            platform: profile.platform,
-            problemsSolved: profile.problemsSolved || 0,
-            rating: profile.rating || 0
-        })
-    );
+    const codingStats = codingProfiles.map(profile => ({
+    codingProfileId: profile._id,
+    platform: profile.platform,
+    problemsSolved: profile.problemsSolved || 0,
+    rating: profile.rating || 0
+    }));
     
     //Find active company
     let activeCompany = null;

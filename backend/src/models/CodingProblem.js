@@ -8,14 +8,9 @@ const codingProblemSchema = new mongoose.Schema(
             required: true
         },
 
-        platform: {
-            type: String,
-            enum: [
-                "LeetCode",
-                "Codeforces",
-                "CodeChef",
-                "HackerRank"
-            ],
+        codingProfileId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "CodingProfile",
             required: true
         },
 

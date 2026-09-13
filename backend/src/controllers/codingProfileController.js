@@ -1,5 +1,7 @@
 const codingProfileService = require("../services/codingProfileService");
 
+
+// CREATE CODING PROFILE
 const createCodingProfile = async (req, res) => {
     try {
         const codingProfile =
@@ -14,6 +16,8 @@ const createCodingProfile = async (req, res) => {
         });
 
     } catch (error) {
+        console.error("Create coding profile error:", error);
+
         res.status(500).json({
             message: "Failed to create coding profile",
             error: error.message
@@ -21,6 +25,8 @@ const createCodingProfile = async (req, res) => {
     }
 };
 
+
+// GET ALL CODING PROFILES
 const getCodingProfiles = async (req, res) => {
     try {
         const codingProfiles =
@@ -33,13 +39,17 @@ const getCodingProfiles = async (req, res) => {
         });
 
     } catch (error) {
+        console.error("Get coding profiles error:", error);
+
         res.status(500).json({
-            message: "Failed to fetch coding profiles",
+            message: "Failed to get coding profiles",
             error: error.message
         });
     }
 };
 
+
+// GET SINGLE CODING PROFILE
 const getCodingProfile = async (req, res) => {
     try {
         const codingProfile =
@@ -59,13 +69,17 @@ const getCodingProfile = async (req, res) => {
         });
 
     } catch (error) {
+        console.error("Get coding profile error:", error);
+
         res.status(500).json({
-            message: "Failed to fetch coding profile",
+            message: "Failed to get coding profile",
             error: error.message
         });
     }
 };
 
+
+// UPDATE CODING PROFILE
 const updateCodingProfile = async (req, res) => {
     try {
         const codingProfile =
@@ -87,6 +101,8 @@ const updateCodingProfile = async (req, res) => {
         });
 
     } catch (error) {
+        console.error("Update coding profile error:", error);
+
         res.status(500).json({
             message: "Failed to update coding profile",
             error: error.message
@@ -94,6 +110,8 @@ const updateCodingProfile = async (req, res) => {
     }
 };
 
+
+// DELETE CODING PROFILE
 const deleteCodingProfile = async (req, res) => {
     try {
         const codingProfile =
@@ -109,16 +127,20 @@ const deleteCodingProfile = async (req, res) => {
         }
 
         res.status(200).json({
-            message: "Coding profile deleted successfully"
+            message: "Coding profile deleted successfully",
+            codingProfile
         });
 
     } catch (error) {
+        console.error("Delete coding profile error:", error);
+
         res.status(500).json({
             message: "Failed to delete coding profile",
             error: error.message
         });
     }
 };
+
 
 module.exports = {
     createCodingProfile,

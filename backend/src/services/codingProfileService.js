@@ -1,4 +1,5 @@
 const CodingProfile = require("../models/CodingProfile");
+const CodingProblem = require("../models/CodingProblem");
 
 const createCodingProfile = async (studentId, profileData) => {
     const codingProfile = await CodingProfile.create({
@@ -47,7 +48,24 @@ const updateCodingProfile = async (
 };
 
 const deleteCodingProfile = async (profileId, studentId) => {
-    const codingProfile = await CodingProfile.findOneAndDelete({
+
+    const codingProfile = await CodingProfile.findOne({
+        _id: profileId,
+        studentId
+    });
+
+    if (!codingProfile) {
+        return null;
+    }
+
+    // Delete all problems belonging to this profile
+    await CodingProblem.deleteMany({
+        codingProfileId: profileId,
+        studentId
+    });
+
+    // Delete the profile
+    await CodingProfile.deleteOne({
         _id: profileId,
         studentId
     });
