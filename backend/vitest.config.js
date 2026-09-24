@@ -3,6 +3,7 @@ const { defineConfig } = require("vitest/config");
 module.exports = defineConfig({
     test: {
         globals: true,
-        setupFiles: ["./test/setup.js"]
+        setupFiles: ["./test/setup.js"],
+        fileParallelism: false
     }
 });
