@@ -1,0 +1,548 @@
+.certifications-page {
+  position: relative;
+}
+
+/* =========================================
+   MESSAGES
+========================================= */
+
+.certification-message {
+  margin: 18px 0;
+  padding: 12px 15px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.certification-message.error {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.07);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.certification-message.success {
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.07);
+  border-color: rgba(34, 197, 94, 0.22);
+}
+
+/* =========================================
+   STATS
+========================================= */
+
+.certification-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.certification-stat-card {
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.certification-stat-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.certification-stat-card strong {
+  display: block;
+  color: var(--text);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.certification-card {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  min-height: 245px;
+
+  padding: 19px;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  background: var(--surface);
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.certification-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.13);
+  background: var(--surface-soft);
+}
+
+.certification-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.certification-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(245, 158, 11, 0.16);
+  border-radius: 10px;
+
+  background: rgba(245, 158, 11, 0.07);
+
+  color: var(--accent);
+}
+
+.certification-actions {
+  display: flex;
+  gap: 3px;
+}
+
+.certification-card h3 {
+  margin: 20px 0 7px;
+
+  color: var(--text);
+
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.certification-issuer {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.certification-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 18px;
+  padding-top: 13px;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--text-muted);
+
+  font-size: 10px;
+}
+
+.certification-date strong {
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.certification-footer {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.certification-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.certification-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+  text-decoration: none;
+
+  transition: color 0.15s ease;
+}
+
+.certification-link:hover {
+  color: var(--accent);
+}
+
+.no-evidence {
+  color: #555;
+  font-size: 10px;
+}
+
+/* =========================================
+   SHARED ICON BUTTON
+========================================= */
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--text-muted);
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.icon-button:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border);
+}
+
+.icon-button.danger:hover {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.icon-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-state.large {
+  padding: 65px 24px;
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(0, 0, 0, 0.76);
+
+  backdrop-filter: blur(8px);
+}
+
+.certification-modal {
+  width: min(560px, 100%);
+  max-height: calc(100vh - 48px);
+
+  overflow-y: auto;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+
+  background: #0d0d0d;
+
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.55);
+
+  animation: certificationModalIn 0.16s ease-out;
+}
+
+@keyframes certificationModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================
+   MODAL HEADER
+========================================= */
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 20px 22px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-header .eyebrow {
+  color: var(--accent);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+
+.modal-header h2 {
+  margin: 5px 0 0;
+
+  color: var(--text);
+
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 31px;
+  height: 31px;
+
+  padding: 0;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--text-muted);
+
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.certification-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+
+  padding: 21px 22px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.form-field label {
+  color: #d4d4d8;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.form-field input {
+  width: 100%;
+  box-sizing: border-box;
+
+  height: 38px;
+
+  padding: 10px 11px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #111111;
+  color: var(--text);
+
+  font-family: inherit;
+  font-size: 12px;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.form-field input:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.form-field input:focus {
+  border-color: rgba(245, 158, 11, 0.55);
+  background: #121212;
+  box-shadow:
+    0 0 0 2px
+    rgba(245, 158, 11, 0.06);
+}
+
+.form-field input::placeholder {
+  color: #555;
+}
+
+.form-field small {
+  color: #666;
+  font-size: 10px;
+}
+
+/* =========================================
+   MODAL ACTIONS
+========================================= */
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  margin-top: 4px;
+  padding-top: 17px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 36px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: transparent;
+  color: var(--text-muted);
+
+  cursor: pointer;
+
+  font-size: 12px;
+}
+
+.secondary-button:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.certification-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.certification-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.certification-modal::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 999px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+  .certifications-grid {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+}
+
+@media (max-width: 700px) {
+  .certification-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .certifications-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .certification-modal {
+    max-height: calc(100vh - 24px);
+  }
+
+  .modal-header,
+  .certification-form {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media (max-width: 450px) {
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}
