@@ -6,13 +6,12 @@ import {
 } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
-
 import ProtectedRoute from "./components/ProtectedRoute";
-
 import DashboardLayout from "./layouts/DashboardLayout";
 
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import Skills from "./pages/Skills";
 import Projects from "./pages/Projects";
 import Certifications from "./pages/Certifications";
 import Coding from "./pages/Coding";
@@ -23,17 +22,13 @@ import Progress from "./pages/Progress";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-
 function App() {
   return (
     <BrowserRouter>
-
       <AuthProvider>
-
         <Routes>
 
-          {/* Public routes */}
-
+          {/* AUTH */}
           <Route
             path="/login"
             element={<Login />}
@@ -45,8 +40,7 @@ function App() {
           />
 
 
-          {/* Protected routes */}
-
+          {/* PROTECTED APPLICATION */}
           <Route element={<ProtectedRoute />}>
 
             <Route element={<DashboardLayout />}>
@@ -59,6 +53,11 @@ function App() {
               <Route
                 path="/profile"
                 element={<Profile />}
+              />
+
+              <Route
+                path="/skills"
+                element={<Skills />}
               />
 
               <Route
@@ -96,8 +95,7 @@ function App() {
           </Route>
 
 
-          {/* Default */}
-
+          {/* DEFAULT */}
           <Route
             path="/"
             element={
@@ -107,9 +105,6 @@ function App() {
               />
             }
           />
-
-
-          {/* Unknown route */}
 
           <Route
             path="*"
@@ -122,9 +117,7 @@ function App() {
           />
 
         </Routes>
-
       </AuthProvider>
-
     </BrowserRouter>
   );
 }
