@@ -46,13 +46,8 @@ const progressSnapshotSchema = new mongoose.Schema(
 
             platform: {
                 type: String,
-                enum: [
-                    "LeetCode",
-                    "Codeforces",
-                    "CodeChef",
-                    "HackerRank"
-                ],
-                required: true
+                required: true,
+                trim: true
             },
 
             problemsSolved: {

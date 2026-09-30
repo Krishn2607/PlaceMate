@@ -1,30 +1,30 @@
-const express = require("express");
+    const express = require("express");
 
-const {
-    generateProgressSnapshot,
-    getCurrentProgressSnapshot
-} = require("../controllers/progressSnapshotController");
+    const {
+        generateProgressSnapshot,
+        getCurrentProgressSnapshot
+    } = require("../controllers/progressSnapshotController");
 
-const protect =
-    require("../middleware/authMiddleware");
+    const protect =
+        require("../middleware/authMiddleware");
 
-const router = express.Router();
-
-
-// Generate current progress snapshot
-router.post(
-    "/generate",
-    protect,
-    generateProgressSnapshot
-);
+    const router = express.Router();
 
 
-// Get current progress snapshot
-router.get(
-    "/current",
-    protect,
-    getCurrentProgressSnapshot
-);
+    // Generate current progress snapshot
+    router.post(
+        "/generate",
+        protect,
+        generateProgressSnapshot
+    );
 
 
-module.exports = router;
+    // Get current progress snapshot
+    router.get(
+        "/current",
+        protect,
+        getCurrentProgressSnapshot
+    );
+
+
+    module.exports = router;

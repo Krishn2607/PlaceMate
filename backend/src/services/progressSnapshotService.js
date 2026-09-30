@@ -15,7 +15,7 @@ const {
 // Generate current progress
 const generateProgressSnapshot = async (studentId) => {
 
-    //Get student
+    // Get student
     const student = await Student.findById(studentId);
 
     if (!student) {
@@ -23,21 +23,19 @@ const generateProgressSnapshot = async (studentId) => {
     }
 
 
-    //Get projects
+    // Get projects
     const projects = await Project.find({
         studentId
     });
 
 
-
-    //Get certifications
+    // Get certifications
     const certifications = await Certification.find({
         studentId
     });
 
 
-
-    //Get coding profiles
+    // Get coding profiles
     const codingProfiles = await CodingProfile.find({
         studentId
     });
@@ -49,8 +47,7 @@ const generateProgressSnapshot = async (studentId) => {
     });
 
 
-
-    //Get current weekly plan
+    // Get current weekly plan
     const weeklyPlan = await WeeklyPlan.findOne({
         studentId
     }).sort({
@@ -58,7 +55,7 @@ const generateProgressSnapshot = async (studentId) => {
     });
 
 
-    //Get latest resume
+    // Get latest resume
     const resume = await Resume.findOne({
         studentId
     }).sort({
@@ -66,7 +63,7 @@ const generateProgressSnapshot = async (studentId) => {
     });
 
 
-    //Get previous progress snapshot
+    // Get previous progress snapshot
     const previousSnapshot =
         await ProgressSnapshot.findOne({
             studentId
@@ -75,8 +72,7 @@ const generateProgressSnapshot = async (studentId) => {
         });
 
 
-
-    //Send data to AI
+    // Send current data + previous snapshot to AI
     const progressAnalysis =
         await generateProgressWithAI({
             student,
@@ -89,15 +85,16 @@ const generateProgressSnapshot = async (studentId) => {
         });
 
 
-    //Prepare current coding stats
+    // Prepare current coding stats
     const codingStats = codingProfiles.map(profile => ({
-    codingProfileId: profile._id,
-    platform: profile.platform,
-    problemsSolved: profile.problemsSolved || 0,
-    rating: profile.rating || 0
+        codingProfileId: profile._id,
+        platform: profile.platform,
+        problemsSolved: profile.problemsSolved || 0,
+        rating: profile.rating || 0
     }));
-    
-    //Find active company
+
+
+    // Find active company
     let activeCompany = null;
 
     if (
@@ -115,8 +112,7 @@ const generateProgressSnapshot = async (studentId) => {
     }
 
 
-    
-    //Get ATS score
+    // Get ATS score
     let atsScore = 0;
 
     if (resume && resume.atsScore !== undefined) {
@@ -124,14 +120,14 @@ const generateProgressSnapshot = async (studentId) => {
     }
 
 
-    
-    //Create current snapshot
+    // Create current snapshot
     const newSnapshot =
         await ProgressSnapshot.create({
 
             studentId,
 
-            skills: student.skills || [],
+            skills:
+                student.skills || [],
 
             projectCount:
                 projects.length,
@@ -147,24 +143,21 @@ const generateProgressSnapshot = async (studentId) => {
         });
 
 
-    
-    //Delete old snapshot
-    if (previousSnapshot) {
+    // IMPORTANT:
+    // Previous snapshots are intentionally preserved.
+    //
+    // This allows PlaceMate to compare:
+    //
+    // Previous Snapshot → Current Snapshot
+    //
+    // and gives us progress history for future use.
 
-        await ProgressSnapshot.deleteOne({
-            _id: previousSnapshot._id
-        });
-    }
 
-
-    
-    //Return result
     return {
         snapshot: newSnapshot,
         analysis: progressAnalysis
     };
 };
-
 
 
 // Get current progress
@@ -180,10 +173,7 @@ const getCurrentProgressSnapshot = async (
 };
 
 
-
 // Get progress snapshot by ID
-
-
 const getProgressSnapshotById = async (
     snapshotId,
     studentId
@@ -196,10 +186,7 @@ const getProgressSnapshotById = async (
 };
 
 
-
 // Delete progress snapshot
-
-
 const deleteProgressSnapshot = async (
     snapshotId,
     studentId
