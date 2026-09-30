@@ -1,132 +1,273 @@
 import { useState } from "react";
 
 import {
-  Link,
-  useNavigate,
+    Link,
+    useNavigate,
 } from "react-router-dom";
 
 import { Sparkles } from "lucide-react";
 
 import { useAuth } from "../context/AuthContext";
 
+
 function Login() {
-  const { login } = useAuth();
 
-  const navigate = useNavigate();
+    const { login } = useAuth();
 
-  const [email, setEmail] =
-    useState("");
+    const navigate = useNavigate();
 
-  const [password, setPassword] =
-    useState("");
 
-  const [error, setError] =
-    useState("");
+    const [email, setEmail] =
+        useState("");
 
-  const [loading, setLoading] =
-    useState(false);
+    const [password, setPassword] =
+        useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+    const [error, setError] =
+        useState("");
 
-    setError("");
-    setLoading(true);
+    const [loading, setLoading] =
+        useState(false);
 
-    try {
-      await login(email, password);
 
-      navigate("/dashboard");
-    } catch (error) {
-      setError(
-        error.response?.data?.message ||
-          "Login failed"
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    // ==========================================
+    // HANDLE EMAIL CHANGE
+    // ==========================================
 
-  return (
-    <div className="auth-page">
+    const handleEmailChange = (event) => {
 
-      <div className="auth-card">
+        setEmail(
+            event.target.value
+        );
 
-        <div className="auth-logo">
-          <Sparkles size={22} />
-        </div>
+        setError("");
+    };
 
-        <div className="eyebrow">
-          PLACEMENT OS
-        </div>
 
-        <h1>
-          Welcome back.
-        </h1>
+    // ==========================================
+    // HANDLE PASSWORD CHANGE
+    // ==========================================
 
-        <p>
-          Continue building your placement profile.
-        </p>
+    const handlePasswordChange = (event) => {
 
-        <form onSubmit={handleSubmit}>
+        setPassword(
+            event.target.value
+        );
 
-          <div className="input-group">
-            <label>Email</label>
+        setError("");
+    };
 
-            <input
-              type="email"
-              value={email}
-              onChange={(event) =>
-                setEmail(
-                  event.target.value
-                )
-              }
-              required
-            />
-          </div>
 
-          <div className="input-group">
-            <label>Password</label>
+    // ==========================================
+    // VALIDATE LOGIN FORM
+    // ==========================================
 
-            <input
-              type="password"
-              value={password}
-              onChange={(event) =>
-                setPassword(
-                  event.target.value
-                )
-              }
-              required
-            />
-          </div>
+    const validateForm = () => {
 
-          {error && (
-            <div className="form-error">
-              {error}
+        const trimmedEmail =
+            email.trim();
+
+
+        if (!trimmedEmail) {
+            return "Please enter your email.";
+        }
+
+
+        if (!password) {
+            return "Please enter your password.";
+        }
+
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (!emailPattern.test(trimmedEmail)) {
+            return "Please enter a valid email address.";
+        }
+
+
+        return "";
+    };
+
+
+    // ==========================================
+    // HANDLE LOGIN
+    // ==========================================
+
+    const handleSubmit = async (event) => {
+
+        event.preventDefault();
+
+        setError("");
+
+
+        // ======================================
+        // FRONTEND VALIDATION
+        // ======================================
+
+        const validationError =
+            validateForm();
+
+        if (validationError) {
+
+            setError(
+                validationError
+            );
+
+            return;
+        }
+
+
+        try {
+
+            setLoading(true);
+
+
+            await login(
+                email.trim(),
+                password
+            );
+
+
+            navigate("/dashboard");
+
+        } catch (error) {
+
+            console.error(
+                "Login error:",
+                error
+            );
+
+
+            setError(
+                error.response?.data?.message ||
+                "Unable to complete login. Please try again."
+            );
+
+        } finally {
+
+            setLoading(false);
+        }
+    };
+
+
+    return (
+
+        <div className="auth-page">
+
+            <div className="auth-card">
+
+                <div className="auth-logo">
+                    <Sparkles size={22} />
+                </div>
+
+
+                <div className="eyebrow">
+                    PLACEMENT OS
+                </div>
+
+
+                <h1>
+                    Welcome back.
+                </h1>
+
+
+                <p>
+                    Continue building your placement profile.
+                </p>
+
+
+                <form onSubmit={handleSubmit}>
+
+
+                    {/* EMAIL */}
+
+                    <div className="input-group">
+
+                        <label>
+                            Email
+                        </label>
+
+
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={handleEmailChange}
+                            placeholder="Enter your email"
+                            autoComplete="email"
+                            disabled={loading}
+                        />
+
+                    </div>
+
+
+                    {/* PASSWORD */}
+
+                    <div className="input-group">
+
+                        <label>
+                            Password
+                        </label>
+
+
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            placeholder="Enter your password"
+                            autoComplete="current-password"
+                            disabled={loading}
+                        />
+
+                    </div>
+
+
+                    {/* ERROR */}
+
+                    {error && (
+
+                        <div className="form-error">
+                            {error}
+                        </div>
+
+                    )}
+
+
+                    {/* SUBMIT */}
+
+                    <button
+                        type="submit"
+                        className="primary-button full-width"
+                        disabled={loading}
+                    >
+
+                        {loading
+                            ? "Signing in..."
+                            : "Sign in"}
+
+                    </button>
+
+                </form>
+
+
+                {/* REGISTER */}
+
+                <div className="auth-footer">
+
+                    Don't have an account?{" "}
+
+                    <Link to="/register">
+                        Create one
+                    </Link>
+
+                </div>
+
             </div>
-          )}
 
-          <button
-            className="primary-button full-width"
-            disabled={loading}
-          >
-            {loading
-              ? "Signing in..."
-              : "Sign in"}
-          </button>
-
-        </form>
-
-        <div className="auth-footer">
-          Don't have an account?{" "}
-          <Link to="/register">
-            Create one
-          </Link>
         </div>
-
-      </div>
-
-    </div>
-  );
+    );
 }
+
 
 export default Login;

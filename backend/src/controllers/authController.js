@@ -1,11 +1,22 @@
 const Student = require("../models/Student");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
+
+// ==========================================
+// REGISTER
+// ==========================================
+
 const register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const {
+            name,
+            email,
+            password
+        } = req.body;
 
-        const existingStudent = await Student.findOne({ email });
+        const existingStudent =
+            await Student.findOne({ email });
 
         if (existingStudent) {
             return res.status(409).json({
@@ -13,13 +24,15 @@ const register = async (req, res) => {
             });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword =
+            await bcrypt.hash(password, 10);
 
         const student = await Student.create({
             name,
             email,
             password: hashedPassword
         });
+
         res.status(201).json({
             message: "Student registered successfully",
             student: {
@@ -30,38 +43,86 @@ const register = async (req, res) => {
         });
 
     } catch (error) {
+
+        console.error(
+            "Registration error:",
+            error
+        );
+
         res.status(500).json({
-            message: "Registration failed",
-            error: error.message
+            message: "Registration failed. Please try again."
         });
     }
 };
+
+
+// ==========================================
+// LOGIN
+// ==========================================
+
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
 
-        // 1. Find student
-        const student = await Student.findOne({ email });
+        const {
+            email,
+            password
+        } = req.body;
 
-        if (!student) {
-            return res.status(401).json({
-                message: "Invalid email or password"
+
+        // ==================================
+        // BASIC SERVER-SIDE VALIDATION
+        // ==================================
+
+        if (!email || !email.trim()) {
+            return res.status(400).json({
+                message: "Please enter your email."
             });
         }
 
-        // 2. Compare password
-        const isPasswordValid = await bcrypt.compare(
-            password,
-            student.password
-        );
+        if (!password) {
+            return res.status(400).json({
+                message: "Please enter your password."
+            });
+        }
+
+
+        // ==================================
+        // FIND STUDENT
+        // ==================================
+
+        const student =
+            await Student.findOne({
+                email: email.trim()
+            });
+
+        if (!student) {
+            return res.status(404).json({
+                message: "No account found with this email."
+            });
+        }
+
+
+        // ==================================
+        // CHECK PASSWORD
+        // ==================================
+
+        const isPasswordValid =
+            await bcrypt.compare(
+                password,
+                student.password
+            );
 
         if (!isPasswordValid) {
             return res.status(401).json({
-                message: "Invalid email or password"
+                message: "Incorrect password."
             });
         }
 
-        // 3. Create JWT
+
+        // ==================================
+        // CREATE JWT
+        // ==================================
+
         const token = jwt.sign(
             {
                 id: student._id,
@@ -73,7 +134,11 @@ const login = async (req, res) => {
             }
         );
 
-        // 4. Send response
+
+        // ==================================
+        // SEND RESPONSE
+        // ==================================
+
         res.status(200).json({
             message: "Login successful",
             token,
@@ -85,16 +150,31 @@ const login = async (req, res) => {
         });
 
     } catch (error) {
+
+        console.error(
+            "Login error:",
+            error
+        );
+
         res.status(500).json({
-            message: "Login failed",
-            error: error.message
+            message:
+                "Unable to complete login. Please try again."
         });
     }
 };
+
+
+// ==========================================
+// GET CURRENT STUDENT
+// ==========================================
+
 const getMe = async (req, res) => {
     try {
-        const student = await Student.findById(req.student.id)
-            .select("-password");
+
+        const student =
+            await Student.findById(
+                req.student.id
+            ).select("-password");
 
         if (!student) {
             return res.status(404).json({
@@ -107,14 +187,26 @@ const getMe = async (req, res) => {
         });
 
     } catch (error) {
+
+        console.error(
+            "Get student error:",
+            error
+        );
+
         res.status(500).json({
-            message: "Failed to get student",
-            error: error.message
+            message: "Failed to get student"
         });
     }
 };
+
+
+// ==========================================
+// UPDATE PROFILE
+// ==========================================
+
 const updateProfile = async (req, res) => {
     try {
+
         const {
             phone,
             college,
@@ -127,9 +219,11 @@ const updateProfile = async (req, res) => {
             achievements
         } = req.body;
 
-        const student = await Student.findById(
-            req.student.id
-        );
+
+        const student =
+            await Student.findById(
+                req.student.id
+            );
 
         if (!student) {
             return res.status(404).json({
@@ -137,7 +231,11 @@ const updateProfile = async (req, res) => {
             });
         }
 
-        // Update profile
+
+        // ==================================
+        // UPDATE PROFILE
+        // ==================================
+
         student.profile = {
             phone,
             college,
@@ -148,20 +246,32 @@ const updateProfile = async (req, res) => {
             github
         };
 
-        // Update skills
+
+        // ==================================
+        // UPDATE SKILLS
+        // ==================================
+
         if (Array.isArray(skills)) {
             student.skills = skills;
         }
 
-        // Update achievements
+
+        // ==================================
+        // UPDATE ACHIEVEMENTS
+        // ==================================
+
         if (Array.isArray(achievements)) {
             student.achievements = achievements;
         }
 
+
         await student.save();
 
+
         res.status(200).json({
-            message: "Student profile updated successfully",
+            message:
+                "Student profile updated successfully",
+
             student: {
                 id: student._id,
                 name: student.name,
@@ -173,17 +283,20 @@ const updateProfile = async (req, res) => {
         });
 
     } catch (error) {
+
         console.error(
             "Update profile error:",
             error
         );
 
         res.status(500).json({
-            message: "Failed to update student profile",
-            error: error.message
+            message:
+                "Failed to update student profile"
         });
     }
 };
+
+
 module.exports = {
     register,
     login,
