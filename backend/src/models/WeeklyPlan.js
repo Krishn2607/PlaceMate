@@ -1,5 +1,38 @@
 const mongoose = require("mongoose");
 
+const weeklyPlanTaskSchema = new mongoose.Schema(
+    {
+        title: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
+        category: {
+            type: String,
+            enum: [
+                "Coding",
+                "Project",
+                "Resume",
+                "Aptitude",
+                "Interview",
+                "Learning",
+                "Profile",
+                "Other"
+            ],
+            default: "Other"
+        },
+
+        completed: {
+            type: Boolean,
+            default: false
+        }
+    },
+    {
+        _id: true
+    }
+);
+
 const weeklyPlanSchema = new mongoose.Schema(
     {
         studentId: {
@@ -24,20 +57,10 @@ const weeklyPlanSchema = new mongoose.Schema(
             trim: true
         },
 
-        tasks: [
-            {
-                title: {
-                    type: String,
-                    required: true,
-                    trim: true
-                },
-
-                completed: {
-                    type: Boolean,
-                    default: false
-                }
-            }
-        ],
+        tasks: {
+            type: [weeklyPlanTaskSchema],
+            default: []
+        },
 
         status: {
             type: String,
@@ -57,6 +80,9 @@ const weeklyPlanSchema = new mongoose.Schema(
     }
 );
 
-const WeeklyPlan = mongoose.model("WeeklyPlan", weeklyPlanSchema);
+const WeeklyPlan = mongoose.model(
+    "WeeklyPlan",
+    weeklyPlanSchema
+);
 
 module.exports = WeeklyPlan;

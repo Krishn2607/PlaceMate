@@ -10,6 +10,22 @@ const {
 } = require("./weeklyPlanAIService");
 
 
+const ALLOWED_CATEGORIES = [
+    "Coding",
+    "Project",
+    "Resume",
+    "Aptitude",
+    "Interview",
+    "Learning",
+    "Profile",
+    "Other"
+];
+
+
+// ==========================================
+// GENERATE WEEKLY PLAN
+// ==========================================
+
 const generateWeeklyPlan = async (studentId) => {
 
     // 1. Get student
@@ -64,15 +80,62 @@ const generateWeeklyPlan = async (studentId) => {
         });
 
 
-    // 8. Calculate current week's dates
+    // 8. Validate AI response
+
+    if (
+        !generatedPlan ||
+        typeof generatedPlan.goal !== "string" ||
+        !Array.isArray(generatedPlan.tasks)
+    ) {
+        throw new Error(
+            "AI generated an invalid weekly plan."
+        );
+    }
+
+
+    // 9. Clean and validate tasks
+
+    const tasks = generatedPlan.tasks
+        .filter(
+            task =>
+                task &&
+                typeof task.title === "string" &&
+                task.title.trim().length > 0
+        )
+        .map(task => {
+
+            const category =
+                ALLOWED_CATEGORIES.includes(
+                    task.category
+                )
+                    ? task.category
+                    : "Other";
+
+            return {
+                title: task.title.trim(),
+                category,
+                completed: false
+            };
+        });
+
+
+    // 10. Calculate current week's dates
+
     const now = new Date();
 
-    const weekStartDate = new Date(now);
+    const weekStartDate =
+        new Date(now);
 
-    weekStartDate.setHours(0, 0, 0, 0);
+    weekStartDate.setHours(
+        0,
+        0,
+        0,
+        0
+    );
 
 
-    const weekEndDate = new Date(weekStartDate);
+    const weekEndDate =
+        new Date(weekStartDate);
 
     weekEndDate.setDate(
         weekEndDate.getDate() + 6
@@ -86,52 +149,58 @@ const generateWeeklyPlan = async (studentId) => {
     );
 
 
-    // 9. Delete previous weekly plan
+    // 11. Delete previous weekly plan
+
     await WeeklyPlan.deleteMany({
         studentId
     });
 
 
-    // 10. Create new weekly plan
-    const weeklyPlan = await WeeklyPlan.create({
+    // 12. Create new weekly plan
 
-        studentId,
+    const weeklyPlan =
+        await WeeklyPlan.create({
 
-        weekStartDate,
+            studentId,
 
-        weekEndDate,
+            weekStartDate,
 
-        goal: generatedPlan.goal,
+            weekEndDate,
 
-        tasks: generatedPlan.tasks.map(
-            task => ({
-                title: task.title,
-                completed: false
-            })
-        ),
+            goal:
+                generatedPlan.goal.trim(),
 
-        status: "Not Started",
+            tasks,
 
-        progress: 0
-    });
+            status: "Not Started",
+
+            progress: 0
+        });
 
 
     return weeklyPlan;
 };
 
 
-// Get latest weekly plan
-const getCurrentWeeklyPlan = async (studentId) => {
+// ==========================================
+// GET CURRENT WEEKLY PLAN
+// ==========================================
 
-    return await WeeklyPlan.findOne({
-        studentId
-    }).sort({
-        createdAt: -1
-    });
-};
+const getCurrentWeeklyPlan =
+    async (studentId) => {
+
+        return await WeeklyPlan.findOne({
+            studentId
+        }).sort({
+            createdAt: -1
+        });
+    };
 
 
-// Get plan by ID
+// ==========================================
+// GET PLAN BY ID
+// ==========================================
+
 const getWeeklyPlanById = async (
     planId,
     studentId
@@ -144,7 +213,10 @@ const getWeeklyPlanById = async (
 };
 
 
-// Update weekly plan
+// ==========================================
+// UPDATE WEEKLY PLAN
+// ==========================================
+
 const updateWeeklyPlan = async (
     planId,
     studentId,
@@ -162,20 +234,69 @@ const updateWeeklyPlan = async (
     }
 
 
-    if (planData.goal !== undefined) {
+    // Update goal
+
+    if (
+        planData.goal !== undefined
+    ) {
+
         weeklyPlan.goal =
             planData.goal;
     }
 
 
-    if (planData.tasks !== undefined) {
+    // Update tasks
+
+    if (
+        planData.tasks !== undefined
+    ) {
+
+        if (
+            !Array.isArray(
+                planData.tasks
+            )
+        ) {
+
+            throw new Error(
+                "Tasks must be an array."
+            );
+        }
+
+
         weeklyPlan.tasks =
-            planData.tasks;
+            planData.tasks.map(task => {
+
+                const category =
+                    ALLOWED_CATEGORIES.includes(
+                        task.category
+                    )
+                        ? task.category
+                        : "Other";
+
+                return {
+                    title:
+                        typeof task.title === "string"
+                            ? task.title.trim()
+                            : "",
+
+                    category,
+
+                    completed:
+                        Boolean(
+                            task.completed
+                        )
+                };
+            });
     }
 
 
-    // Calculate progress
-    if (weeklyPlan.tasks.length === 0) {
+    // ==========================================
+    // CALCULATE PROGRESS
+    // ==========================================
+
+    if (
+        weeklyPlan.tasks.length === 0
+    ) {
 
         weeklyPlan.progress = 0;
 
@@ -183,25 +304,34 @@ const updateWeeklyPlan = async (
 
         const completedTasks =
             weeklyPlan.tasks.filter(
-                task => task.completed
+                task =>
+                    task.completed
             ).length;
 
         weeklyPlan.progress =
             Math.round(
-                (completedTasks /
-                    weeklyPlan.tasks.length) *
-                100
+                (
+                    completedTasks /
+                    weeklyPlan.tasks.length
+                ) * 100
             );
     }
 
 
-    // Update status
-    if (weeklyPlan.progress === 0) {
+    // ==========================================
+    // UPDATE STATUS
+    // ==========================================
+
+    if (
+        weeklyPlan.progress === 0
+    ) {
 
         weeklyPlan.status =
             "Not Started";
 
-    } else if (weeklyPlan.progress === 100) {
+    } else if (
+        weeklyPlan.progress === 100
+    ) {
 
         weeklyPlan.status =
             "Completed";
@@ -219,17 +349,21 @@ const updateWeeklyPlan = async (
 };
 
 
-// Delete weekly plan
-const deleteWeeklyPlan = async (
-    planId,
-    studentId
-) => {
+// ==========================================
+// DELETE WEEKLY PLAN
+// ==========================================
 
-    return await WeeklyPlan.findOneAndDelete({
-        _id: planId,
+const deleteWeeklyPlan =
+    async (
+        planId,
         studentId
-    });
-};
+    ) => {
+
+        return await WeeklyPlan.findOneAndDelete({
+            _id: planId,
+            studentId
+        });
+    };
 
 
 module.exports = {
