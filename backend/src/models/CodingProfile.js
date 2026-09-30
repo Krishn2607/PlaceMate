@@ -10,8 +10,14 @@ const codingProfileSchema = new mongoose.Schema(
 
         platform: {
             type: String,
-            enum: ["LeetCode", "Codeforces", "CodeChef", "HackerRank"],
-            required: true
+            enum: [
+                "LeetCode",
+                "Codeforces",
+                "CodeChef",
+                "HackerRank"
+            ],
+            required: true,
+            trim: true
         },
 
         username: {
@@ -28,12 +34,14 @@ const codingProfileSchema = new mongoose.Schema(
 
         rating: {
             type: Number,
-            default: 0
+            default: 0,
+            min: 0
         },
 
         problemsSolved: {
             type: Number,
-            default: 0
+            default: 0,
+            min: 0
         }
     },
     {
