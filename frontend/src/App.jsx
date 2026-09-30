@@ -19,7 +19,6 @@ import Resumes from "./pages/Resumes";
 import WeeklyPlan from "./pages/WeeklyPlan";
 import Progress from "./pages/Progress";
 import Readiness from "./pages/Readiness";
-import TargetCompanies from "./pages/TargetCompanies";
 import AboutPlaceMate from "./pages/AboutPlaceMate";
 
 import Login from "./pages/Login";
@@ -97,11 +96,6 @@ function App() {
                             <Route
                                 path="/resumes"
                                 element={<Resumes />}
-                            />
-
-                            <Route
-                                path="/target-companies"
-                                element={<TargetCompanies />}
                             />
 
                             <Route
