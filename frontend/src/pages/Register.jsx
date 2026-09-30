@@ -1,24 +1,33 @@
 import { useState } from "react";
+
 import {
   Link,
   useNavigate,
 } from "react-router-dom";
 
+import { Sparkles } from "lucide-react";
+
 import { useAuth } from "../context/AuthContext";
 
 function Register() {
+  const { register } = useAuth();
+
   const navigate = useNavigate();
 
-  const {
-    register,
-  } = useAuth();
+  const [name, setName] =
+    useState("");
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] =
+    useState("");
 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [password, setPassword] =
+    useState("");
+
+  const [error, setError] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,7 +46,7 @@ function Register() {
     } catch (error) {
       setError(
         error.response?.data?.message ||
-        "Registration failed"
+          "Registration failed"
       );
     } finally {
       setLoading(false);
@@ -49,100 +58,91 @@ function Register() {
 
       <div className="auth-card">
 
-        <h1>Create Account</h1>
+        <div className="auth-logo">
+          <Sparkles size={22} />
+        </div>
+
+        <div className="eyebrow">
+          PLACEMENT OS
+        </div>
+
+        <h1>
+          Build your PlaceMate profile.
+        </h1>
 
         <p>
-          Start your placement preparation with PlaceMate.
+          Start organizing your placement preparation.
         </p>
-
-        {error && (
-          <div className="error-message">
-            {error}
-          </div>
-        )}
 
         <form onSubmit={handleSubmit}>
 
-          <div className="form-group">
-
-            <label>
-              Name
-            </label>
+          <div className="input-group">
+            <label>Name</label>
 
             <input
-              type="text"
               value={name}
               onChange={(event) =>
-                setName(event.target.value)
+                setName(
+                  event.target.value
+                )
               }
-              placeholder="Enter your name"
               required
             />
-
           </div>
 
-
-          <div className="form-group">
-
-            <label>
-              Email
-            </label>
+          <div className="input-group">
+            <label>Email</label>
 
             <input
               type="email"
               value={email}
               onChange={(event) =>
-                setEmail(event.target.value)
+                setEmail(
+                  event.target.value
+                )
               }
-              placeholder="Enter your email"
               required
             />
-
           </div>
 
-
-          <div className="form-group">
-
-            <label>
-              Password
-            </label>
+          <div className="input-group">
+            <label>Password</label>
 
             <input
               type="password"
               value={password}
               onChange={(event) =>
-                setPassword(event.target.value)
+                setPassword(
+                  event.target.value
+                )
               }
-              placeholder="Create a password"
               required
             />
-
           </div>
 
+          {error && (
+            <div className="form-error">
+              {error}
+            </div>
+          )}
 
           <button
-            type="submit"
+            className="primary-button full-width"
             disabled={loading}
           >
             {loading
-              ? "Creating account..."
-              : "Register"}
+              ? "Creating..."
+              : "Create account"}
           </button>
 
         </form>
 
-
-        <p className="auth-footer">
-
-          Already have an account?
-
-          {" "}
-
+        <div className="auth-footer">
+          Already have an account?{" "}
           <Link to="/login">
-            Login
+            Sign in
           </Link>
-
-        </p>
+        </div>
 
       </div>
 

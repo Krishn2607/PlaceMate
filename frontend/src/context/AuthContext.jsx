@@ -10,10 +10,12 @@ import api from "../services/api";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+
   const [student, setStudent] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -22,33 +24,52 @@ export function AuthProvider({ children }) {
     }
 
     const fetchStudent = async () => {
+
       try {
+
         const response = await api.get("/auth/me");
 
-        setStudent(response.data.student);
+        setStudent(
+          response.data.student
+        );
+
       } catch (error) {
+
         localStorage.removeItem("token");
         setStudent(null);
+
       } finally {
+
         setLoading(false);
+
       }
     };
 
     fetchStudent();
+
   }, []);
 
-  const login = async (email, password) => {
-    const response = await api.post("/auth/login", {
-      email,
-      password,
-    });
+  const login = async (
+    email,
+    password
+  ) => {
+
+    const response = await api.post(
+      "/auth/login",
+      {
+        email,
+        password,
+      }
+    );
 
     localStorage.setItem(
       "token",
       response.data.token
     );
 
-    setStudent(response.data.student);
+    setStudent(
+      response.data.student
+    );
 
     return response.data;
   };
@@ -58,6 +79,7 @@ export function AuthProvider({ children }) {
     email,
     password
   ) => {
+
     const response = await api.post(
       "/auth/register",
       {
@@ -71,7 +93,9 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
+
     localStorage.removeItem("token");
+
     setStudent(null);
   };
 

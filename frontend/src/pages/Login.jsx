@@ -1,20 +1,30 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+
+import {
+  Link,
+  useNavigate,
+} from "react-router-dom";
+
+import { Sparkles } from "lucide-react";
 
 import { useAuth } from "../context/AuthContext";
 
 function Login() {
+  const { login } = useAuth();
+
   const navigate = useNavigate();
 
-  const {
-    login,
-  } = useAuth();
+  const [email, setEmail] =
+    useState("");
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] =
+    useState("");
 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [error, setError] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,16 +33,13 @@ function Login() {
     setLoading(true);
 
     try {
-      await login(
-        email,
-        password
-      );
+      await login(email, password);
 
       navigate("/dashboard");
     } catch (error) {
       setError(
         error.response?.data?.message ||
-        "Login failed"
+          "Login failed"
       );
     } finally {
       setLoading(false);
@@ -44,81 +51,77 @@ function Login() {
 
       <div className="auth-card">
 
-        <h1>Welcome Back</h1>
+        <div className="auth-logo">
+          <Sparkles size={22} />
+        </div>
+
+        <div className="eyebrow">
+          PLACEMENT OS
+        </div>
+
+        <h1>
+          Welcome back.
+        </h1>
 
         <p>
-          Login to your PlaceMate account.
+          Continue building your placement profile.
         </p>
-
-        {error && (
-          <div className="error-message">
-            {error}
-          </div>
-        )}
 
         <form onSubmit={handleSubmit}>
 
-          <div className="form-group">
-
-            <label>
-              Email
-            </label>
+          <div className="input-group">
+            <label>Email</label>
 
             <input
               type="email"
               value={email}
               onChange={(event) =>
-                setEmail(event.target.value)
+                setEmail(
+                  event.target.value
+                )
               }
-              placeholder="Enter your email"
               required
             />
-
           </div>
 
-
-          <div className="form-group">
-
-            <label>
-              Password
-            </label>
+          <div className="input-group">
+            <label>Password</label>
 
             <input
               type="password"
               value={password}
               onChange={(event) =>
-                setPassword(event.target.value)
+                setPassword(
+                  event.target.value
+                )
               }
-              placeholder="Enter your password"
               required
             />
-
           </div>
 
+          {error && (
+            <div className="form-error">
+              {error}
+            </div>
+          )}
 
           <button
-            type="submit"
+            className="primary-button full-width"
             disabled={loading}
           >
             {loading
-              ? "Logging in..."
-              : "Login"}
+              ? "Signing in..."
+              : "Sign in"}
           </button>
 
         </form>
 
-
-        <p className="auth-footer">
-
-          Don't have an account?
-
-          {" "}
-
+        <div className="auth-footer">
+          Don't have an account?{" "}
           <Link to="/register">
-            Register
+            Create one
           </Link>
-
-        </p>
+        </div>
 
       </div>
 
