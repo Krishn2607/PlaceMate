@@ -20,6 +20,8 @@ import WeeklyPlan from "./pages/WeeklyPlan";
 import Progress from "./pages/Progress";
 import Readiness from "./pages/Readiness";
 import AboutPlaceMate from "./pages/AboutPlaceMate";
+import Settings from "./pages/Settings";
+import TargetCompanies from "./pages/TargetCompanies";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -99,6 +101,11 @@ function App() {
                             />
 
                             <Route
+                                path="/target-companies"
+                                element={<TargetCompanies />}
+                            />
+
+                            <Route
                                 path="/weekly-plan"
                                 element={<WeeklyPlan />}
                             />
@@ -111,6 +118,11 @@ function App() {
                             <Route
                                 path="/about"
                                 element={<AboutPlaceMate />}
+                            />
+
+                            <Route
+                                path="/settings"
+                                element={<Settings />}
                             />
 
                         </Route>

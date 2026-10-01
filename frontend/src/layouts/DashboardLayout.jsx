@@ -113,7 +113,7 @@ function DashboardLayout() {
 
 
     // ==========================================
-    // NAVIGATION
+    // WORKSPACE NAVIGATION
     // ==========================================
 
     const workspaceLinks = [
@@ -164,6 +164,13 @@ function DashboardLayout() {
             path: "/resumes",
             label: "Resume",
             icon: "▤",
+            exact: true
+        },
+
+        {
+            path: "/target-companies",
+            label: "Target Companies",
+            icon: "◎",
             exact: true
         },
 
@@ -220,6 +227,16 @@ function DashboardLayout() {
         }
 
 
+        if (
+            location.pathname ===
+            "/settings"
+        ) {
+
+            return "Settings";
+
+        }
+
+
         return "Overview";
 
     };
@@ -234,16 +251,16 @@ function DashboardLayout() {
         <div className="app-shell">
 
 
-            {/* =====================================================
+            {/* ==========================================
                 SIDEBAR
-            ====================================================== */}
+            =========================================== */}
 
             <aside className="sidebar">
 
 
-                {/* =================================================
+                {/* ======================================
                     BRAND
-                ================================================== */}
+                ======================================= */}
 
                 <div className="brand">
 
@@ -266,9 +283,9 @@ function DashboardLayout() {
                 </div>
 
 
-                {/* =================================================
+                {/* ======================================
                     STUDENT PROFILE CARD
-                ================================================== */}
+                ======================================= */}
 
                 <div
                     className={
@@ -327,14 +344,16 @@ function DashboardLayout() {
                     </button>
 
 
-                    {/* ==========================================
+                    {/* ==================================
                         PROFILE MENU
-                    =========================================== */}
+                    =================================== */}
 
                     {profileMenuOpen && (
 
                         <div className="profile-menu">
 
+
+                            {/* PROFILE MENU HEADER */}
 
                             <div className="profile-menu-header">
 
@@ -399,6 +418,43 @@ function DashboardLayout() {
                             </button>
 
 
+                            {/* ACCOUNT SETTINGS */}
+
+                            <button
+                                type="button"
+                                className="profile-menu-item"
+                                onClick={() => {
+
+                                    setProfileMenuOpen(
+                                        false
+                                    );
+
+                                    navigate(
+                                        "/settings"
+                                    );
+
+                                }}
+                            >
+
+                                <span>
+                                    ⚙
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Account settings
+                                    </strong>
+
+                                    <small>
+                                        Password & security
+                                    </small>
+
+                                </div>
+
+                            </button>
+
+
                             <div className="profile-menu-divider" />
 
 
@@ -426,7 +482,6 @@ function DashboardLayout() {
 
                             </button>
 
-
                         </div>
 
                     )}
@@ -434,9 +489,9 @@ function DashboardLayout() {
                 </div>
 
 
-                {/* =================================================
+                {/* ======================================
                     WORKSPACE
-                ================================================== */}
+                ======================================= */}
 
                 <div className="sidebar-section-title">
                     WORKSPACE
@@ -452,7 +507,9 @@ function DashboardLayout() {
                                 key={item.path}
                                 to={item.path}
                                 end={item.exact}
-                                className={({ isActive }) =>
+                                className={({
+                                    isActive
+                                }) =>
                                     isActive
                                         ? "sidebar-link active"
                                         : "sidebar-link"
@@ -473,9 +530,9 @@ function DashboardLayout() {
                                 {item.path ===
                                     "/weekly-plan" && (
 
-                                        <span className="nav-dot" />
+                                    <span className="nav-dot" />
 
-                                    )}
+                                )}
 
                             </NavLink>
 
@@ -485,52 +542,19 @@ function DashboardLayout() {
                 </nav>
 
 
-                {/* =================================================
-                    SIDEBAR BOTTOM
-                ================================================== */}
-
-                <div className="sidebar-bottom">
-
-
-                    {/* =================================================
-                        LOGOUT ONLY
-                    ================================================== */}
-
-                    <button
-                        className="bottom-link"
-                        type="button"
-                        onClick={
-                            handleLogout
-                        }
-                    >
-
-                        <span>
-                            ↪
-                        </span>
-
-                        <span>
-                            Logout
-                        </span>
-
-                    </button>
-
-
-                </div>
-
-
             </aside>
 
 
-            {/* =====================================================
+            {/* ==========================================
                 MAIN SHELL
-            ====================================================== */}
+            =========================================== */}
 
             <div className="main-shell">
 
 
-                {/* =================================================
+                {/* ======================================
                     TOPBAR
-                ================================================== */}
+                ======================================= */}
 
                 <header className="topbar">
 
@@ -554,27 +578,9 @@ function DashboardLayout() {
                     </div>
 
 
-                    {/* TOPBAR ACTIONS */}
+                    {/* USER AVATAR */}
 
                     <div className="topbar-actions">
-
-
-                        {/* NOTIFICATION */}
-
-                        <button
-                            className="notification-button"
-                            type="button"
-                            aria-label="Notifications"
-                        >
-
-                            ♧
-
-                            <span />
-
-                        </button>
-
-
-                        {/* USER AVATAR */}
 
                         <button
                             type="button"
@@ -592,16 +598,15 @@ function DashboardLayout() {
 
                         </button>
 
-
                     </div>
 
 
                 </header>
 
 
-                {/* =================================================
+                {/* ======================================
                     PAGE CONTENT
-                ================================================== */}
+                ======================================= */}
 
                 <main className="page-content">
 
