@@ -1,389 +1,689 @@
+/* ==========================================
+   READINESS PAGE
+========================================== */
+
 .readiness-page {
     display: flex;
     flex-direction: column;
+
     gap: 30px;
+
     padding-bottom: 48px;
 }
 
-.readiness-hero {
+
+/* ==========================================
+   HERO
+========================================== */
+
+.readiness-page .readiness-hero {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+
+    gap: 30px;
 }
 
-.readiness-hero h1 {
+.readiness-page .readiness-hero h1 {
     margin: 8px 0 10px;
+
+    color: #f5f5f5;
+
     font-size: 34px;
+    font-weight: 700;
+
     line-height: 1.15;
+    letter-spacing: -0.8px;
 }
 
-.readiness-hero p {
+.readiness-page .readiness-hero p {
     max-width: 650px;
+
     margin: 0;
-    color: var(--text-muted, #92929b);
+
+    color: #858585;
+
     line-height: 1.6;
+    font-size: 14px;
 }
 
-.readiness-layout {
+
+/* ==========================================
+   MAIN LAYOUT
+========================================== */
+
+.readiness-page .readiness-layout {
     display: grid;
-    grid-template-columns: minmax(300px, 0.8fr) minmax(500px, 1.2fr);
+
+    grid-template-columns:
+        minmax(300px, 0.8fr)
+        minmax(500px, 1.2fr);
+
     gap: 18px;
 }
 
-.large-readiness-card,
-.score-card {
-    border: 1px solid var(--border, #25252d);
+
+/* ==========================================
+   COMMON CARDS
+========================================== */
+
+.readiness-page .large-readiness-card,
+.readiness-page .score-card {
+    border: 1px solid #282828;
     border-radius: 18px;
-    background: var(--card-bg, #15151b);
+
+    background: #0a0a0a;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease;
 }
 
-.large-readiness-card {
+.readiness-page .large-readiness-card:hover,
+.readiness-page .score-card:hover {
+    background: #0e0e0e;
+    border-color: #343434;
+}
+
+
+/* ==========================================
+   LARGE READINESS CARD
+========================================== */
+
+.readiness-page .large-readiness-card {
     padding: 30px;
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+
     background:
         radial-gradient(
             circle at 50% 0%,
             rgba(255, 122, 24, 0.13),
             transparent 55%
         ),
-        var(--card-bg, #15151b);
+        #0a0a0a;
 }
 
-.readiness-score-wrapper {
+.readiness-page .large-readiness-card:hover {
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 122, 24, 0.15),
+            transparent 55%
+        ),
+        #0e0e0e;
+}
+
+.readiness-page .readiness-score-wrapper {
     margin-bottom: 18px;
 }
 
-.big-score-circle {
+
+/* ==========================================
+   BIG SCORE
+========================================== */
+
+.readiness-page .big-score-circle {
     width: 170px;
     height: 170px;
+
     border-radius: 50%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     border: 8px solid rgba(255, 122, 24, 0.18);
+
     box-shadow:
         inset 0 0 0 1px rgba(255, 122, 24, 0.12);
+
+    background: #0a0a0a;
 }
 
-.big-score-circle strong {
+.readiness-page .big-score-circle strong {
+    color: #f5f5f5;
+
     font-size: 52px;
     line-height: 1;
     font-weight: 850;
 }
 
-.big-score-circle span {
+.readiness-page .big-score-circle span {
     margin-top: 7px;
-    color: var(--text-muted, #92929b);
+
+    color: #858585;
+
     font-size: 13px;
 }
 
-.readiness-badge {
+
+/* ==========================================
+   READINESS BADGE
+========================================== */
+
+.readiness-page .readiness-badge {
     display: inline-flex;
     align-items: center;
+
     padding: 7px 11px;
+
     border-radius: 999px;
+
     font-size: 12px;
     font-weight: 750;
+
     margin-bottom: 15px;
 }
 
-.readiness-badge.strong {
+.readiness-page .readiness-badge.strong {
     color: #75d99b;
     background: rgba(70, 190, 110, 0.1);
 }
 
-.readiness-badge.on-track {
+.readiness-page .readiness-badge.on-track {
     color: #ffb15e;
     background: rgba(255, 122, 24, 0.1);
 }
 
-.readiness-badge.developing {
+.readiness-page .readiness-badge.developing {
     color: #ffbd66;
     background: rgba(255, 174, 60, 0.1);
 }
 
-.readiness-badge.early {
+.readiness-page .readiness-badge.early {
     color: #ff8585;
     background: rgba(220, 70, 70, 0.1);
 }
 
-.large-readiness-card h2 {
+
+/* ==========================================
+   READINESS CARD CONTENT
+========================================== */
+
+.readiness-page .large-readiness-card h2 {
     margin: 0 0 10px;
+
+    color: #f5f5f5;
+
     font-size: 22px;
+    font-weight: 650;
 }
 
-.large-readiness-card > p {
-    margin: 0;
+.readiness-page .large-readiness-card > p {
     max-width: 570px;
-    color: var(--text-muted, #92929b);
+
+    margin: 0;
+
+    color: #858585;
+
     line-height: 1.65;
 }
 
-.readiness-note {
+
+/* ==========================================
+   READINESS NOTE
+========================================== */
+
+.readiness-page .readiness-note {
     display: flex;
     align-items: flex-start;
+
     gap: 9px;
+
     margin-top: 20px;
     padding: 12px 14px;
+
+    border: 1px solid rgba(255, 122, 24, 0.08);
     border-radius: 11px;
+
     background: rgba(255, 122, 24, 0.06);
-    color: var(--text-muted, #a5a5ad);
+
+    color: #a5a5ad;
+
     font-size: 12px;
     line-height: 1.5;
 }
 
-.readiness-note svg {
+.readiness-page .readiness-note svg {
     flex-shrink: 0;
+
     color: #ff7a18;
+
     margin-top: 1px;
 }
 
-.score-card {
+
+/* ==========================================
+   SCORE CARD
+========================================== */
+
+.readiness-page .score-card {
     padding: 26px;
 }
 
-.score-card-header h2 {
+.readiness-page .score-card-header h2 {
     margin: 0 0 5px;
+
+    color: #f5f5f5;
+
     font-size: 21px;
+    font-weight: 650;
 }
 
-.score-card-header p {
+.readiness-page .score-card-header p {
     margin: 0;
-    color: var(--text-muted, #92929b);
+
+    color: #858585;
+
     font-size: 13px;
 }
 
-.score-list {
+
+/* ==========================================
+   SCORE LIST
+========================================== */
+
+.readiness-page .score-list {
     display: flex;
     flex-direction: column;
+
     gap: 21px;
+
     margin-top: 24px;
 }
 
-.score-row {
+.readiness-page .score-row {
     display: grid;
+
     grid-template-columns: 36px minmax(0, 1fr);
+
     gap: 12px;
 }
 
-.score-row-icon {
+.readiness-page .score-row-icon {
     width: 36px;
     height: 36px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 10px;
+
     color: #ff7a18;
+
     background: rgba(255, 122, 24, 0.09);
 }
 
-.score-info {
+.readiness-page .score-info {
     min-width: 0;
 }
 
-.score-name-row {
+.readiness-page .score-name-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
     gap: 14px;
+
     margin-bottom: 9px;
 }
 
-.score-name-row > div {
+.readiness-page .score-name-row > div {
     display: flex;
     flex-direction: column;
+
     gap: 3px;
 }
 
-.score-name-row strong {
+.readiness-page .score-name-row strong {
+    color: #e5e5e5;
+
     font-size: 14px;
 }
 
-.score-name-row span {
-    color: var(--text-muted, #85858e);
+.readiness-page .score-name-row span {
+    color: #85858e;
+
     font-size: 11px;
 }
 
-.score-number {
+.readiness-page .score-number {
     color: #ff7a18;
+
     font-size: 14px;
+    font-weight: 600;
 }
 
-.score-track {
+
+/* ==========================================
+   SCORE TRACK
+========================================== */
+
+.readiness-page .score-track {
     width: 100%;
     height: 7px;
+
     border-radius: 99px;
+
     overflow: hidden;
-    background: #25252d;
+
+    background: #282828;
 }
 
-.score-fill {
+.readiness-page .score-fill {
     height: 100%;
+
     border-radius: inherit;
+
     background: #ff7a18;
+
     transition: width 0.5s ease;
 }
 
-.score-raw {
+.readiness-page .score-raw {
     margin-top: 5px;
-    color: var(--text-muted, #72727b);
+
+    color: #72727b;
+
     font-size: 10px;
 }
 
-.readiness-section {
+
+/* ==========================================
+   INSIGHTS SECTION
+========================================== */
+
+.readiness-page .readiness-section {
     display: flex;
     flex-direction: column;
 }
 
-.readiness-section > h2 {
+.readiness-page .readiness-section > h2 {
     margin: 7px 0 18px;
+
+    color: #f5f5f5;
+
     font-size: 24px;
+    font-weight: 650;
 }
 
-.readiness-insight-grid {
+
+/* ==========================================
+   INSIGHT GRID
+========================================== */
+
+.readiness-page .readiness-insight-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
     gap: 16px;
 }
 
-.readiness-insight-card {
+.readiness-page .readiness-insight-card {
     display: flex;
+
     gap: 13px;
+
     padding: 20px;
-    border: 1px solid var(--border, #25252d);
+
+    border: 1px solid #282828;
     border-radius: 15px;
-    background: var(--card-bg, #15151b);
+
+    background: #0a0a0a;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
 }
 
-.insight-icon {
+.readiness-page .readiness-insight-card:hover {
+    background: #0e0e0e;
+
+    border-color: #343434;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   INSIGHT ICONS
+========================================== */
+
+.readiness-page .insight-icon {
     flex-shrink: 0;
+
     width: 38px;
     height: 38px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 10px;
 }
 
-.insight-icon.success {
+.readiness-page .insight-icon.success {
     color: #73d99a;
+
     background: rgba(80, 200, 120, 0.1);
 }
 
-.insight-icon.warning {
+.readiness-page .insight-icon.warning {
     color: #ffb15e;
+
     background: rgba(255, 122, 24, 0.1);
 }
 
-.insight-icon.ai {
+.readiness-page .insight-icon.ai {
     color: #ff7a18;
+
     background: rgba(255, 122, 24, 0.1);
 }
 
-.insight-label {
+
+/* ==========================================
+   INSIGHT CONTENT
+========================================== */
+
+.readiness-page .insight-label {
     display: block;
+
     color: #ff7a18;
+
     font-size: 9px;
     font-weight: 800;
+
     letter-spacing: 0.08em;
+
     margin-bottom: 5px;
 }
 
-.readiness-insight-card h3 {
+.readiness-page .readiness-insight-card h3 {
     margin: 0 0 7px;
+
+    color: #f5f5f5;
+
     font-size: 16px;
+    font-weight: 600;
 }
 
-.readiness-insight-card p {
+.readiness-page .readiness-insight-card p {
     margin: 0;
-    color: var(--text-muted, #909099);
+
+    color: #909099;
+
     font-size: 13px;
     line-height: 1.55;
 }
 
-.readiness-method-card {
+
+/* ==========================================
+   METHOD CARD
+========================================== */
+
+.readiness-page .readiness-method-card {
     padding: 25px;
+
     border: 1px solid rgba(255, 122, 24, 0.2);
     border-radius: 18px;
-    background: rgba(255, 122, 24, 0.025);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 122, 24, 0.035),
+            rgba(255, 122, 24, 0.01)
+        ),
+        #0a0a0a;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease;
 }
 
-.method-header {
+.readiness-page .readiness-method-card:hover {
+    border-color: rgba(255, 122, 24, 0.3);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 122, 24, 0.045),
+            rgba(255, 122, 24, 0.015)
+        ),
+        #0e0e0e;
+}
+
+
+/* ==========================================
+   METHOD HEADER
+========================================== */
+
+.readiness-page .method-header {
     display: flex;
     align-items: center;
+
     gap: 12px;
 }
 
-.method-icon {
+.readiness-page .method-icon {
     width: 40px;
     height: 40px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 11px;
+
     color: #ff7a18;
+
     background: rgba(255, 122, 24, 0.1);
 }
 
-.method-header h2 {
+.readiness-page .method-header h2 {
     margin: 5px 0 0;
+
+    color: #f5f5f5;
+
     font-size: 20px;
+    font-weight: 650;
 }
 
-.weight-grid {
+
+/* ==========================================
+   WEIGHT GRID
+========================================== */
+
+.readiness-page .weight-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
     gap: 10px;
+
     margin-top: 22px;
 }
 
-.weight-grid > div {
+.readiness-page .weight-grid > div {
     padding: 14px 10px;
+
     text-align: center;
-    border: 1px solid var(--border, #25252d);
+
+    border: 1px solid #282828;
     border-radius: 11px;
-    background: var(--card-bg, #15151b);
+
+    background: #0a0a0a;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
 }
 
-.weight-grid strong {
+.readiness-page .weight-grid > div:hover {
+    background: #0e0e0e;
+
+    border-color: #343434;
+}
+
+.readiness-page .weight-grid strong {
     display: block;
+
     color: #ff7a18;
+
     font-size: 17px;
 }
 
-.weight-grid span {
+.readiness-page .weight-grid span {
     display: block;
+
     margin-top: 4px;
-    color: var(--text-muted, #8d8d96);
+
+    color: #8d8d96;
+
     font-size: 10px;
 }
 
-.method-description {
+.readiness-page .method-description {
     margin: 18px 0 0;
-    color: var(--text-muted, #85858e);
+
+    color: #85858e;
+
     font-size: 12px;
     line-height: 1.6;
 }
 
-.readiness-loading {
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.readiness-page .readiness-loading {
     min-height: 400px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--text-muted, #92929b);
+
+    color: #92929b;
 }
 
-.readiness-loading p {
+.readiness-page .readiness-loading p {
     margin-top: 12px;
 }
 
-.readiness-spinner {
+.readiness-page .readiness-spinner {
     color: #ff7a18;
+
     animation: readiness-spin 1s linear infinite;
 }
 
@@ -397,49 +697,52 @@
     }
 }
 
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
 @media (max-width: 1100px) {
-
-    .readiness-layout {
+    .readiness-page .readiness-layout {
         grid-template-columns: 1fr;
     }
 
-    .readiness-insight-grid {
+    .readiness-page .readiness-insight-grid {
         grid-template-columns: 1fr;
     }
 
-    .weight-grid {
-        grid-template-columns: repeat(3, 1fr);
+    .readiness-page .weight-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
     }
-
 }
 
 @media (max-width: 700px) {
-
     .readiness-page {
         gap: 22px;
     }
 
-    .readiness-hero h1 {
+    .readiness-page .readiness-hero h1 {
         font-size: 28px;
     }
 
-    .large-readiness-card,
-    .score-card,
-    .readiness-method-card {
+    .readiness-page .large-readiness-card,
+    .readiness-page .score-card,
+    .readiness-page .readiness-method-card {
         padding: 20px;
     }
 
-    .weight-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .readiness-page .weight-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
-    .big-score-circle {
+    .readiness-page .big-score-circle {
         width: 145px;
         height: 145px;
     }
 
-    .big-score-circle strong {
+    .readiness-page .big-score-circle strong {
         font-size: 44px;
     }
-
 }
