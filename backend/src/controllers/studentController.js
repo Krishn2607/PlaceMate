@@ -1,4 +1,6 @@
 const Student = require("../models/Student");
+const bcrypt = require("bcryptjs");
+
 
 
 // GET CURRENT STUDENT PROFILE
@@ -112,7 +114,89 @@ const updateProfile = async (req, res) => {
     }
 };
 
+// CHANGE CURRENT STUDENT PASSWORD
+const changePassword = async (req, res) => {
+    try {
+        const {
+            currentPassword,
+            newPassword
+        } = req.body;
 
+        if (!currentPassword) {
+            return res.status(400).json({
+                message: "Current password is required"
+            });
+        }
+
+        if (!newPassword) {
+            return res.status(400).json({
+                message: "New password is required"
+            });
+        }
+
+        if (newPassword.length < 6) {
+            return res.status(400).json({
+                message: "New password must be at least 6 characters"
+            });
+        }
+
+        const student = await Student.findById(
+            req.student.id
+        );
+
+        if (!student) {
+            return res.status(404).json({
+                message: "Student not found"
+            });
+        }
+
+        const passwordMatches = await bcrypt.compare(
+            currentPassword,
+            student.password
+        );
+
+        if (!passwordMatches) {
+            return res.status(400).json({
+                message: "Current password is incorrect"
+            });
+        }
+
+        const isSamePassword = await bcrypt.compare(
+            newPassword,
+            student.password
+        );
+
+        if (isSamePassword) {
+            return res.status(400).json({
+                message: "New password must be different from current password"
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(
+            newPassword,
+            10
+        );
+
+        student.password = hashedPassword;
+
+        await student.save();
+
+        res.status(200).json({
+            message: "Password changed successfully"
+        });
+
+    } catch (error) {
+        console.error(
+            "Change password error:",
+            error
+        );
+
+        res.status(500).json({
+            message: "Failed to change password",
+            error: error.message
+        });
+    }
+};
 
 // GET SKILLS
 const getSkills = async (req, res) => {
@@ -654,6 +738,7 @@ const deleteTargetCompany = async (req, res) => {
 module.exports = {
     getProfile,
     updateProfile,
+    changePassword,
 
     getSkills,
     addSkill,

@@ -6,11 +6,12 @@ import api from "./api";
 // ==========================================
 
 export const getProfile = async () => {
-  const response = await api.get(
-    "/students/profile"
-  );
 
-  return response.data.student;
+    const response = await api.get(
+        "/students/profile"
+    );
+
+    return response.data.student;
 };
 
 
@@ -19,12 +20,13 @@ export const getProfile = async () => {
 // ==========================================
 
 export const updateProfile = async (
-  profileData
-) => {
-  const response = await api.put(
-    "/students/profile",
     profileData
-  );
+) => {
 
-  return response.data;
+    const response = await api.put(
+        "/students/profile",
+        profileData
+    );
+
+    return response.data;
 };

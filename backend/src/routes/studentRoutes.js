@@ -3,6 +3,7 @@ const express = require("express");
 const {
     getProfile,
     updateProfile,
+    changePassword,
 
     getSkills,
     addSkill,
@@ -40,6 +41,14 @@ router.put(
 );
 
 
+// PASSWORD
+router.put(
+    "/change-password",
+    protect,
+    changePassword
+);
+
+
 
 // SKILLS
 router.get(
@@ -65,6 +74,7 @@ router.delete(
     protect,
     deleteSkill
 );
+
 
 
 // ACHIEVEMENTS
