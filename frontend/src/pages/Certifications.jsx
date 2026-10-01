@@ -19,7 +19,7 @@ import {
   deleteCertification,
   getCertifications,
   updateCertification,
-} from "../services/certificationservice";
+} from "../services/certificationService";
 
 import "./Certifications.css";
 

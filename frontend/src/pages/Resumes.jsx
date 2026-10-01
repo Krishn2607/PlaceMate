@@ -23,7 +23,7 @@ import {
 } from "../services/resumeService";
 
 import { getProjects } from "../services/projectService";
-import { getCertifications } from "../services/certificationservice"  ;
+import { getCertifications } from "../services/certificationService";
 
 import "./Resumes.css";
 
