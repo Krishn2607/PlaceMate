@@ -1,3 +1,5 @@
+import "./Coding.css";
+
 import {
   useEffect,
   useMemo,
@@ -10,7 +12,8 @@ import {
   getCodingProfiles,
   getCodingProblems,
   getCurrentWeeklyPlan,
-  updateCodingProfile
+  updateCodingProfile,
+  deleteCodingProfile
 } from "../services/codingService";
 
 
@@ -170,6 +173,11 @@ function Coding() {
     setSubmitting
   ] = useState(false);
 
+  const [
+    deletingProfileId,
+    setDeletingProfileId
+  ] = useState(null);
+
 
   // ==========================================
   // LOAD DATA
@@ -180,7 +188,6 @@ function Coding() {
     try {
 
       setLoading(true);
-
       setError("");
 
       const [
@@ -270,9 +277,6 @@ function Coding() {
     }
 
 
-    // Only tasks explicitly categorized
-    // as Coding belong to the Coding goal.
-
     const codingTasks =
       (weeklyPlan.tasks || [])
         .filter(
@@ -294,7 +298,6 @@ function Coding() {
     return {
 
       completed,
-
       total,
 
       progress:
@@ -315,21 +318,6 @@ function Coding() {
   //
   // WEEK 1 STARTS FROM THE FIRST
   // PROBLEM THE USER EVER TRACKED.
-  //
-  // Example:
-  //
-  // First problem: Sep 29
-  //     -> W1
-  //
-  // Problem on Oct 2
-  //     -> W1
-  //
-  // Problem on Oct 6
-  //     -> W2
-  //
-  // Problem on Oct 13
-  //     -> W3
-  //
   // ==========================================
 
   const activityData = useMemo(() => {
@@ -432,11 +420,6 @@ function Coding() {
           );
 
 
-        /*
-         * Only display the first
-         * eight tracking weeks.
-         */
-
         if (
           weekIndex >= 0 &&
           weekIndex < 8
@@ -524,7 +507,6 @@ function Coding() {
       try {
 
         setSubmitting(true);
-
         setError("");
 
         const profileData = {
@@ -601,6 +583,16 @@ function Coding() {
           err
         );
 
+        /*
+         * Backend now returns a clear
+         * message for duplicate accounts.
+         *
+         * Example:
+         *
+         * This coding account is already
+         * added to your profile.
+         */
+
         setError(
           err.response?.data?.message ||
           "Failed to save coding profile."
@@ -609,6 +601,156 @@ function Coding() {
       } finally {
 
         setSubmitting(false);
+
+      }
+
+    };
+
+
+  // ==========================================
+  // DELETE CODING PROFILE
+  // ==========================================
+
+  const handleDeleteProfile =
+    async (profile) => {
+
+      const confirmed =
+        window.confirm(
+          `Are you sure you want to delete the ${profile.platform} profile "@${profile.username}"?\n\nAll coding problems tracked under this profile will also be deleted.`
+        );
+
+
+      if (!confirmed) {
+        return;
+      }
+
+
+      try {
+
+        setDeletingProfileId(
+          profile._id
+        );
+
+        setError("");
+
+
+        await deleteCodingProfile(
+          profile._id
+        );
+
+
+        /*
+         * Remove the deleted profile
+         * from the current UI.
+         */
+
+        setCodingProfiles(
+          previous =>
+            previous.filter(
+              item =>
+                item._id !==
+                profile._id
+            )
+        );
+
+
+        /*
+         * Remove problems belonging
+         * to the deleted profile.
+         */
+
+        setCodingProblems(
+          previous =>
+            previous.filter(
+              problem =>
+                (
+                  problem.codingProfileId?._id ||
+                  problem.codingProfileId
+                ) !== profile._id
+            )
+        );
+
+
+        /*
+         * If the deleted profile was
+         * selected in the problem form,
+         * select another available profile.
+         */
+
+        setProblemForm(
+          previous => {
+
+            if (
+              previous.codingProfileId !==
+              profile._id
+            ) {
+
+              return previous;
+
+            }
+
+
+            const remainingProfiles =
+              codingProfiles.filter(
+                item =>
+                  item._id !==
+                  profile._id
+              );
+
+
+            return {
+              ...previous,
+              codingProfileId:
+                remainingProfiles.length > 0
+                  ? remainingProfiles[0]._id
+                  : ""
+            };
+
+          }
+        );
+
+
+        /*
+         * Close edit modal if the
+         * deleted profile was being edited.
+         */
+
+        if (
+          editingProfileId ===
+          profile._id
+        ) {
+
+          setShowProfileModal(
+            false
+          );
+
+          setEditingProfileId(
+            null
+          );
+
+          setProfileForm(
+            EMPTY_PROFILE
+          );
+
+        }
+
+      } catch (err) {
+
+        console.error(
+          "Delete coding profile error:",
+          err
+        );
+
+        setError(
+          err.response?.data?.message ||
+          "Failed to delete coding profile."
+        );
+
+      } finally {
+
+        setDeletingProfileId(
+          null
+        );
 
       }
 
@@ -627,7 +769,6 @@ function Coding() {
       try {
 
         setSubmitting(true);
-
         setError("");
 
         const newProblem =
@@ -667,10 +808,6 @@ function Coding() {
           ]
         );
 
-
-        // Reload profiles so the
-        // automatically calculated
-        // solved count is reflected.
 
         const updatedProfiles =
           await getCodingProfiles();
@@ -1026,6 +1163,7 @@ function Coding() {
 
             <button
               className="panel-button"
+              type="button"
             >
               All platforms
             </button>
@@ -1285,14 +1423,39 @@ function Coding() {
 
 
                     <button
+                      type="button"
                       className="panel-button"
                       onClick={() =>
                         openEditProfileModal(
                           profile
                         )
                       }
+                      disabled={
+                        deletingProfileId ===
+                        profile._id
+                      }
                     >
                       Edit
+                    </button>
+
+
+                    <button
+                      type="button"
+                      className="panel-button delete-profile-button"
+                      onClick={() =>
+                        handleDeleteProfile(
+                          profile
+                        )
+                      }
+                      disabled={
+                        deletingProfileId ===
+                        profile._id
+                      }
+                    >
+                      {deletingProfileId ===
+                      profile._id
+                        ? "Deleting..."
+                        : "Delete"}
                     </button>
 
                   </div>
@@ -1305,6 +1468,7 @@ function Coding() {
           )}
 
         </div>
+
 
       </section>
 
@@ -1555,6 +1719,7 @@ function Coding() {
               </div>
 
               <button
+                type="button"
                 className="modal-close"
                 onClick={() => {
 
@@ -1660,6 +1825,11 @@ function Coding() {
                   placeholder="https://..."
                   required
                 />
+
+                <small>
+                  The same coding account cannot
+                  be added more than once.
+                </small>
 
               </label>
 
@@ -1781,6 +1951,7 @@ function Coding() {
               </div>
 
               <button
+                type="button"
                 className="modal-close"
                 onClick={() =>
                   setShowProblemModal(
@@ -2003,7 +2174,7 @@ function Coding() {
                 >
 
                   {submitting
-                    ? "Saving..."
+                    ? "Adding..."
                     : "Add problem"}
 
                 </button>
@@ -2023,5 +2194,6 @@ function Coding() {
   );
 
 }
+
 
 export default Coding;

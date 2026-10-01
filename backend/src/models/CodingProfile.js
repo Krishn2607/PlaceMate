@@ -32,6 +32,12 @@ const codingProfileSchema = new mongoose.Schema(
             trim: true
         },
 
+        normalizedProfileURL: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
         rating: {
             type: Number,
             default: 0,
@@ -48,6 +54,42 @@ const codingProfileSchema = new mongoose.Schema(
         timestamps: true
     }
 );
+
+
+// ==========================================
+// UNIQUE CODING ACCOUNT PER STUDENT
+// ==========================================
+
+/*
+ * A student can have multiple accounts
+ * on the same coding platform.
+ *
+ * Example:
+ *
+ * LeetCode → accountA   ✅
+ * LeetCode → accountB   ✅
+ * LeetCode → accountA   ❌
+ *
+ * Therefore platform is NOT unique.
+ *
+ * The combination of:
+ *
+ * studentId + normalizedProfileURL
+ *
+ * must be unique.
+ */
+
+codingProfileSchema.index(
+    {
+        studentId: 1,
+        normalizedProfileURL: 1
+    },
+    {
+        unique: true,
+        sparse: true
+    }
+);
+
 
 const CodingProfile = mongoose.model(
     "CodingProfile",
