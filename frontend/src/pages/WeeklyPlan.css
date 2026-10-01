@@ -3,10 +3,10 @@
 ========================================================= */
 
 .weekly-plan-page {
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding-bottom: 40px;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-bottom: 40px;
 }
 
 
@@ -15,29 +15,30 @@
 ========================================================= */
 
 .weekly-page-loading {
-  min-height: 420px;
+    min-height: 420px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  color: #777;
-  font-size: 13px;
+    gap: 10px;
+
+    color: #777;
+    font-size: 13px;
 }
 
 .spin {
-  animation: weekly-spin 0.9s linear infinite;
+    animation: weekly-spin 0.9s linear infinite;
 }
 
 @keyframes weekly-spin {
-  from {
-    transform: rotate(0deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
 
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 
@@ -46,38 +47,40 @@
 ========================================================= */
 
 .weekly-page-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
 
-  margin-bottom: 25px;
+    gap: 24px;
+
+    margin-bottom: 25px;
 }
 
 .weekly-page-header h1 {
-  margin: 8px 0 8px;
+    margin: 8px 0 8px;
 
-  color: #f4f4f4;
+    color: #f4f4f4;
 
-  font-size: 30px;
-  line-height: 1.15;
-  font-weight: 650;
-  letter-spacing: -0.8px;
+    font-size: 30px;
+    line-height: 1.15;
+    font-weight: 650;
+
+    letter-spacing: -0.8px;
 }
 
 .weekly-page-header p {
-  max-width: 600px;
+    max-width: 600px;
 
-  margin: 0;
+    margin: 0;
 
-  color: #737373;
+    color: #737373;
 
-  font-size: 12px;
-  line-height: 1.7;
+    font-size: 12px;
+    line-height: 1.7;
 }
 
 .weekly-regenerate-button {
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 
@@ -86,21 +89,22 @@
 ========================================================= */
 
 .weekly-error {
-  display: flex;
-  align-items: center;
-  gap: 9px;
+    display: flex;
+    align-items: center;
 
-  padding: 12px 14px;
-  margin-bottom: 16px;
+    gap: 9px;
 
-  border: 1px solid rgba(255, 105, 55, 0.25);
-  border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
 
-  background: rgba(255, 105, 55, 0.07);
+    border: 1px solid rgba(220, 60, 60, 0.25);
+    border-radius: 10px;
 
-  color: #ff956e;
+    background: rgba(220, 60, 60, 0.07);
 
-  font-size: 12px;
+    color: #ff8b8b;
+
+    font-size: 12px;
 }
 
 
@@ -109,65 +113,65 @@
 ========================================================= */
 
 .weekly-empty-state {
-  min-height: 430px;
+    min-height: 430px;
 
-  padding: 55px 30px;
+    padding: 55px 30px;
 
-  border: 1px solid #252525;
-  border-radius: 16px;
+    border: 1px solid #252525;
+    border-radius: 16px;
 
-  background:
-    radial-gradient(
-      circle at top center,
-      rgba(255, 112, 48, 0.08),
-      transparent 45%
-    ),
-    #0a0a0a;
+    background:
+        radial-gradient(
+            circle at top center,
+            rgba(255, 122, 24, 0.08),
+            transparent 45%
+        ),
+        #0a0a0a;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-  text-align: center;
+    text-align: center;
 }
 
 .weekly-empty-icon {
-  width: 58px;
-  height: 58px;
+    width: 58px;
+    height: 58px;
 
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 
-  border: 1px solid rgba(255, 112, 48, 0.2);
-  border-radius: 16px;
+    border: 1px solid rgba(255, 122, 24, 0.2);
+    border-radius: 16px;
 
-  background: #17100b;
+    background: #17100b;
 
-  color: var(--orange);
+    color: #ff7a18;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .weekly-empty-state h2 {
-  margin: 10px 0;
+    margin: 10px 0;
 
-  color: #eee;
+    color: #eee;
 
-  font-size: 23px;
-  font-weight: 600;
+    font-size: 23px;
+    font-weight: 600;
 }
 
 .weekly-empty-state p {
-  max-width: 510px;
+    max-width: 510px;
 
-  margin: 0 0 25px;
+    margin: 0 0 25px;
 
-  color: #6e6e6e;
+    color: #6e6e6e;
 
-  font-size: 12px;
-  line-height: 1.7;
+    font-size: 12px;
+    line-height: 1.7;
 }
 
 
@@ -176,105 +180,108 @@
 ========================================================= */
 
 .weekly-summary {
-  min-height: 145px;
+    min-height: 145px;
 
-  padding: 25px;
+    padding: 25px;
 
-  margin-bottom: 14px;
+    margin-bottom: 14px;
 
-  border: 1px solid #282828;
-  border-radius: 16px;
+    border: 1px solid #282828;
+    border-radius: 16px;
 
-  background: #0a0a0a;
+    background: #0a0a0a;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  gap: 30px;
+    gap: 30px;
 }
 
 .weekly-summary-main {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+    display: flex;
+    align-items: center;
 
-  min-width: 0;
+    gap: 16px;
+
+    min-width: 0;
 }
 
 .weekly-summary-icon {
-  width: 46px;
-  height: 46px;
+    width: 46px;
+    height: 46px;
 
-  flex-shrink: 0;
+    flex-shrink: 0;
 
-  border: 1px solid rgba(255, 112, 48, 0.18);
-  border-radius: 12px;
+    border: 1px solid rgba(255, 122, 24, 0.18);
+    border-radius: 12px;
 
-  background: #19100b;
+    background: #19100b;
 
-  color: var(--orange);
+    color: #ff7a18;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-eyebrow {
-  color: #686868;
+    color: #686868;
 
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1.1px;
-  text-transform: uppercase;
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
 }
 
 .weekly-summary h2 {
-  max-width: 750px;
+    max-width: 750px;
 
-  margin: 8px 0 9px;
+    margin: 8px 0 9px;
 
-  color: #ededed;
+    color: #ededed;
 
-  font-size: 19px;
-  line-height: 1.35;
-  font-weight: 600;
+    font-size: 19px;
+    line-height: 1.35;
+    font-weight: 600;
 }
 
 .weekly-date {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+    display: flex;
+    align-items: center;
 
-  color: #656565;
+    gap: 6px;
 
-  font-size: 10px;
+    color: #656565;
+
+    font-size: 10px;
 }
 
 .weekly-progress-score {
-  min-width: 115px;
+    min-width: 115px;
 
-  text-align: center;
+    text-align: center;
 }
 
 .weekly-progress-score strong {
-  display: block;
+    display: block;
 
-  color: var(--orange);
+    color: #ff7a18;
 
-  font-size: 32px;
-  line-height: 1;
-  font-weight: 650;
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 650;
 }
 
 .weekly-progress-score span {
-  display: block;
+    display: block;
 
-  margin-top: 7px;
+    margin-top: 7px;
 
-  color: #626262;
+    color: #626262;
 
-  font-size: 9px;
+    font-size: 9px;
 }
 
 
@@ -283,13 +290,13 @@
 ========================================================= */
 
 .weekly-content-grid {
-  display: grid;
+    display: grid;
 
-  grid-template-columns:
-    minmax(0, 1.65fr)
-    minmax(280px, 0.85fr);
+    grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(280px, 0.85fr);
 
-  gap: 14px;
+    gap: 14px;
 }
 
 
@@ -299,14 +306,14 @@
 
 .weekly-panel,
 .weekly-ai-panel {
-  border: 1px solid #282828;
-  border-radius: 15px;
+    border: 1px solid #282828;
+    border-radius: 15px;
 
-  background: #0a0a0a;
+    background: #0a0a0a;
 }
 
 .weekly-panel {
-  padding: 22px;
+    padding: 22px;
 }
 
 
@@ -315,48 +322,49 @@
 ========================================================= */
 
 .weekly-panel-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
 
-  gap: 20px;
+    gap: 20px;
 
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .weekly-panel-header h2 {
-  margin: 7px 0 5px;
+    margin: 7px 0 5px;
 
-  color: #ededed;
+    color: #ededed;
 
-  font-size: 18px;
-  font-weight: 600;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .weekly-panel-header p {
-  margin: 0;
+    margin: 0;
 
-  color: #666;
+    color: #666;
 
-  font-size: 10px;
+    font-size: 10px;
 }
 
 .weekly-status-badge {
-  padding: 6px 9px;
+    padding: 6px 9px;
 
-  border: 1px solid #2c2c2c;
-  border-radius: 7px;
+    border: 1px solid #2c2c2c;
+    border-radius: 7px;
 
-  background: #111;
+    background: #111;
 
-  color: #a1a1a1;
+    color: #a1a1a1;
 
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.7px;
-  text-transform: uppercase;
+    font-size: 8px;
+    font-weight: 700;
 
-  white-space: nowrap;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+
+    white-space: nowrap;
 }
 
 
@@ -365,46 +373,46 @@
 ========================================================= */
 
 .weekly-progress-section {
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 
 .weekly-progress-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  margin-bottom: 7px;
+    margin-bottom: 7px;
 
-  color: #666;
+    color: #666;
 
-  font-size: 9px;
+    font-size: 9px;
 }
 
 .weekly-progress-label strong {
-  color: #aaa;
+    color: #aaa;
 
-  font-size: 9px;
+    font-size: 9px;
 }
 
 .weekly-progress-track {
-  width: 100%;
-  height: 5px;
+    width: 100%;
+    height: 5px;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  border-radius: 99px;
+    border-radius: 99px;
 
-  background: #222;
+    background: #222;
 }
 
 .weekly-progress-fill {
-  height: 100%;
+    height: 100%;
 
-  border-radius: inherit;
+    border-radius: inherit;
 
-  background: var(--orange);
+    background: #ff7a18;
 
-  transition: width 0.3s ease;
+    transition: width 0.3s ease;
 }
 
 
@@ -413,144 +421,149 @@
 ========================================================= */
 
 .weekly-task-list {
-  border-top: 1px solid #202020;
+    border-top: 1px solid #202020;
 }
 
 .weekly-task {
-  width: 100%;
+    width: 100%;
 
-  min-height: 68px;
+    min-height: 68px;
 
-  padding: 12px 2px;
+    padding: 12px 2px;
 
-  border: 0;
-  border-bottom: 1px solid #202020;
+    border: 0;
+    border-bottom: 1px solid #202020;
 
-  background: transparent;
+    background: transparent;
 
-  color: inherit;
+    color: inherit;
 
-  display: grid;
-  grid-template-columns: 28px 30px minmax(0, 1fr) 20px;
+    display: grid;
 
-  align-items: center;
+    grid-template-columns:
+        28px
+        30px
+        minmax(0, 1fr)
+        20px;
 
-  gap: 9px;
+    align-items: center;
 
-  text-align: left;
+    gap: 9px;
 
-  cursor: pointer;
+    text-align: left;
 
-  transition:
-    background 0.15s ease,
-    padding 0.15s ease;
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        padding 0.15s ease;
 }
 
 .weekly-task:hover {
-  padding-left: 7px;
-  padding-right: 7px;
+    padding-left: 7px;
+    padding-right: 7px;
 
-  background: #0e0e0e;
+    background: #0e0e0e;
 }
 
 .weekly-task:disabled {
-  cursor: default;
+    cursor: default;
 }
 
 .weekly-task-check {
-  width: 24px;
-  height: 24px;
+    width: 24px;
+    height: 24px;
 
-  border: 1px solid #353535;
-  border-radius: 8px;
+    border: 1px solid #353535;
+    border-radius: 8px;
 
-  background: #101010;
+    background: #101010;
 
-  color: #111;
+    color: #111;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  transition: all 0.15s ease;
+    transition: all 0.15s ease;
 }
 
 .weekly-task-check > span {
-  width: 5px;
-  height: 5px;
+    width: 5px;
+    height: 5px;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  background: #444;
+    background: #444;
 }
 
 .weekly-task-check.checked {
-  border-color: var(--orange);
+    border-color: #ff7a18;
 
-  background: var(--orange);
+    background: #ff7a18;
 
-  color: #0a0a0a;
+    color: #0a0a0a;
 }
 
 .weekly-task-number {
-  color: #4f4f4f;
+    color: #4f4f4f;
 
-  font-size: 9px;
-  font-weight: 700;
+    font-size: 9px;
+    font-weight: 700;
 }
 
 .weekly-task-content {
-  min-width: 0;
+    min-width: 0;
 
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  gap: 5px;
+    gap: 5px;
 }
 
 .weekly-task-content strong {
-  overflow: hidden;
+    overflow: hidden;
 
-  color: #cfcfcf;
+    color: #cfcfcf;
 
-  font-size: 11px;
-  line-height: 1.5;
-  font-weight: 500;
+    font-size: 11px;
+    line-height: 1.5;
+    font-weight: 500;
 
-  text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 .weekly-task-content span {
-  color: #555;
+    color: #555;
 
-  font-size: 8px;
+    font-size: 8px;
 }
 
 .weekly-task.completed
-  .weekly-task-content
-  strong {
-  color: #666;
+    .weekly-task-content
+    strong {
+    color: #666;
 
-  text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .weekly-task.completed
-  .weekly-task-content
-  span {
-  color: #777;
+    .weekly-task-content
+    span {
+    color: #777;
 }
 
 .weekly-task-arrow {
-  color: #454545;
+    color: #454545;
 
-  font-size: 14px;
+    font-size: 14px;
 
-  transition: color 0.15s ease;
+    transition: color 0.15s ease;
 }
 
 .weekly-task:hover
-  .weekly-task-arrow {
-  color: var(--orange);
+    .weekly-task-arrow {
+    color: #ff7a18;
 }
 
 
@@ -559,16 +572,17 @@
 ========================================================= */
 
 .weekly-no-tasks {
-  min-height: 100px;
+    min-height: 100px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  color: #555;
+    gap: 8px;
 
-  font-size: 10px;
+    color: #555;
+
+    font-size: 10px;
 }
 
 
@@ -577,52 +591,52 @@
 ========================================================= */
 
 .weekly-ai-panel {
-  padding: 24px;
+    padding: 24px;
 
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(255, 112, 48, 0.07),
-      transparent 42%
-    ),
-    #0a0a0a;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(255, 122, 24, 0.07),
+            transparent 42%
+        ),
+        #0a0a0a;
 }
 
 .weekly-ai-icon {
-  width: 42px;
-  height: 42px;
+    width: 42px;
+    height: 42px;
 
-  margin-bottom: 22px;
+    margin-bottom: 22px;
 
-  border: 1px solid rgba(255, 112, 48, 0.18);
-  border-radius: 11px;
+    border: 1px solid rgba(255, 122, 24, 0.18);
+    border-radius: 11px;
 
-  background: #17100b;
+    background: #17100b;
 
-  color: var(--orange);
+    color: #ff7a18;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .weekly-ai-panel h2 {
-  margin: 9px 0 10px;
+    margin: 9px 0 10px;
 
-  color: #e5e5e5;
+    color: #e5e5e5;
 
-  font-size: 18px;
-  line-height: 1.35;
-  font-weight: 600;
+    font-size: 18px;
+    line-height: 1.35;
+    font-weight: 600;
 }
 
 .weekly-ai-panel > p {
-  margin: 0;
+    margin: 0;
 
-  color: #696969;
+    color: #696969;
 
-  font-size: 10px;
-  line-height: 1.75;
+    font-size: 10px;
+    line-height: 1.75;
 }
 
 
@@ -631,57 +645,58 @@
 ========================================================= */
 
 .ai-plan-details {
-  margin-top: 25px;
+    margin-top: 25px;
 
-  padding: 15px 0;
+    padding: 15px 0;
 
-  border-top: 1px solid #252525;
-  border-bottom: 1px solid #252525;
+    border-top: 1px solid #252525;
+    border-bottom: 1px solid #252525;
 
-  display: grid;
+    display: grid;
 
-  grid-template-columns:
-    repeat(3, 1fr);
+    grid-template-columns:
+        repeat(3, 1fr);
 
-  gap: 10px;
+    gap: 10px;
 }
 
 .ai-plan-details div {
-  min-width: 0;
+    min-width: 0;
 }
 
 .ai-plan-details span {
-  display: block;
+    display: block;
 
-  margin-bottom: 6px;
+    margin-bottom: 6px;
 
-  color: #555;
+    color: #555;
 
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+    font-size: 8px;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .ai-plan-details strong {
-  display: block;
+    display: block;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  color: #ddd;
+    color: #ddd;
 
-  font-size: 11px;
+    font-size: 11px;
 
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .ai-plan-details div:first-child
-  strong,
+    strong,
 .ai-plan-details div:nth-child(2)
-  strong {
-  color: var(--orange);
+    strong {
+    color: #ff7a18;
 
-  font-size: 19px;
+    font-size: 19px;
 }
 
 
@@ -690,24 +705,25 @@
 ========================================================= */
 
 .ai-plan-note {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
+    display: flex;
+    align-items: flex-start;
 
-  margin-top: 18px;
+    gap: 8px;
 
-  color: #595959;
+    margin-top: 18px;
 
-  font-size: 9px;
-  line-height: 1.6;
+    color: #595959;
+
+    font-size: 9px;
+    line-height: 1.6;
 }
 
 .ai-plan-note svg {
-  flex-shrink: 0;
+    flex-shrink: 0;
 
-  margin-top: 1px;
+    margin-top: 1px;
 
-  color: var(--orange);
+    color: #ff7a18;
 }
 
 
@@ -716,73 +732,76 @@
 ========================================================= */
 
 .weekly-plan-page
-  .primary-button,
+    .primary-button,
 .weekly-plan-page
-  .secondary-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
+    .secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  border-radius: 8px;
+    gap: 7px;
 
-  font-size: 10px;
-  font-weight: 600;
+    border-radius: 8px;
 
-  cursor: pointer;
+    font-size: 10px;
+    font-weight: 600;
 
-  transition:
-    background 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease,
-    transform 0.15s ease;
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease;
 }
 
 .weekly-plan-page
-  .primary-button {
-  padding: 10px 14px;
+    .primary-button {
+    padding: 10px 14px;
 
-  border: 1px solid var(--orange);
+    border: 1px solid #ff7a18;
 
-  background: var(--orange);
+    background: #ff7a18;
 
-  color: #0b0b0b;
+    color: #0b0b0b;
 }
 
 .weekly-plan-page
-  .primary-button:hover {
-  transform: translateY(-1px);
+    .primary-button:hover {
+    transform: translateY(-1px);
 
-  background: #ff8142;
+    background: #ff9238;
+
+    border-color: #ff9238;
 }
 
 .weekly-plan-page
-  .secondary-button {
-  padding: 9px 12px;
+    .secondary-button {
+    padding: 9px 12px;
 
-  border: 1px solid #303030;
+    border: 1px solid #303030;
 
-  background: #111;
+    background: #111;
 
-  color: #aaa;
+    color: #aaa;
 }
 
 .weekly-plan-page
-  .secondary-button:hover {
-  border-color: #454545;
+    .secondary-button:hover {
+    border-color: #454545;
 
-  color: #eee;
+    color: #eee;
 
-  background: #151515;
+    background: #151515;
 }
 
 .weekly-plan-page
-  button:disabled {
-  opacity: 0.55;
+    button:disabled {
+    opacity: 0.55;
 
-  cursor: not-allowed;
+    cursor: not-allowed;
 
-  transform: none;
+    transform: none;
 }
 
 
@@ -791,123 +810,137 @@
 ========================================================= */
 
 @media (max-width: 900px) {
-  .weekly-content-grid {
-    grid-template-columns: 1fr;
-  }
 
-  .weekly-ai-panel {
-    min-height: auto;
-  }
+    .weekly-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .weekly-ai-panel {
+        min-height: auto;
+    }
+
 }
+
 
 @media (max-width: 700px) {
-  .weekly-plan-page {
-    padding-bottom: 25px;
-  }
 
-  .weekly-page-header {
-    align-items: flex-start;
+    .weekly-plan-page {
+        padding-bottom: 25px;
+    }
 
-    flex-direction: column;
-  }
+    .weekly-page-header {
+        align-items: flex-start;
 
-  .weekly-page-header h1 {
-    font-size: 25px;
-  }
+        flex-direction: column;
+    }
 
-  .weekly-regenerate-button {
-    width: 100%;
-  }
+    .weekly-page-header h1 {
+        font-size: 25px;
+    }
 
-  .weekly-summary {
-    padding: 19px;
+    .weekly-regenerate-button {
+        width: 100%;
+    }
 
-    align-items: flex-start;
+    .weekly-summary {
+        padding: 19px;
 
-    flex-direction: column;
-  }
+        align-items: flex-start;
 
-  .weekly-summary-main {
-    align-items: flex-start;
-  }
+        flex-direction: column;
+    }
 
-  .weekly-progress-score {
-    width: 100%;
+    .weekly-summary-main {
+        align-items: flex-start;
+    }
 
-    padding-top: 14px;
+    .weekly-progress-score {
+        width: 100%;
 
-    border-top: 1px solid #222;
+        padding-top: 14px;
 
-    text-align: left;
-  }
+        border-top: 1px solid #222;
 
-  .weekly-progress-score strong {
-    display: inline;
+        text-align: left;
+    }
 
-    margin-right: 8px;
+    .weekly-progress-score strong {
+        display: inline;
 
-    font-size: 24px;
-  }
+        margin-right: 8px;
 
-  .weekly-progress-score span {
-    display: inline;
-  }
+        font-size: 24px;
+    }
 
-  .weekly-panel {
-    padding: 17px;
-  }
+    .weekly-progress-score span {
+        display: inline;
+    }
 
-  .weekly-panel-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
+    .weekly-panel {
+        padding: 17px;
+    }
 
-  .weekly-status-badge {
-    align-self: flex-start;
-  }
+    .weekly-panel-header {
+        align-items: flex-start;
 
-  .weekly-task {
-    grid-template-columns:
-      28px 22px minmax(0, 1fr) 14px;
+        flex-direction: column;
+    }
 
-    gap: 7px;
-  }
+    .weekly-status-badge {
+        align-self: flex-start;
+    }
 
-  .weekly-task-content strong {
-    font-size: 10px;
-  }
+    .weekly-task {
+        grid-template-columns:
+            28px
+            22px
+            minmax(0, 1fr)
+            14px;
 
-  .ai-plan-details {
-    grid-template-columns:
-      repeat(3, 1fr);
-  }
+        gap: 7px;
+    }
+
+    .weekly-task-content strong {
+        font-size: 10px;
+    }
+
+    .ai-plan-details {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
 }
 
+
 @media (max-width: 450px) {
-  .weekly-page-header h1 {
-    font-size: 22px;
-  }
 
-  .weekly-empty-state {
-    min-height: 380px;
+    .weekly-page-header h1 {
+        font-size: 22px;
+    }
 
-    padding: 35px 20px;
-  }
+    .weekly-empty-state {
+        min-height: 380px;
 
-  .weekly-empty-state h2 {
-    font-size: 20px;
-  }
+        padding: 35px 20px;
+    }
 
-  .weekly-summary h2 {
-    font-size: 16px;
-  }
+    .weekly-empty-state h2 {
+        font-size: 20px;
+    }
 
-  .weekly-task-number {
-    display: none;
-  }
+    .weekly-summary h2 {
+        font-size: 16px;
+    }
 
-  .weekly-task {
-    grid-template-columns:
-      28px minmax(0, 1fr) 14px;
-  }
+    .weekly-task-number {
+        display: none;
+    }
+
+    .weekly-task {
+        grid-template-columns:
+            28px
+            minmax(0, 1fr)
+            14px;
+    }
+
 }
