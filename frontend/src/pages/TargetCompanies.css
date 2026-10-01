@@ -1,0 +1,674 @@
+/* =========================================================
+   TARGET COMPANIES PAGE
+========================================================= */
+
+.target-companies-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 40px 60px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.target-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.target-eyebrow {
+    margin-bottom: 10px;
+    color: #ff7a18;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.target-header h1 {
+    margin: 0;
+    color: #f4f4f5;
+    font-size: 34px;
+    line-height: 1.15;
+    font-weight: 700;
+}
+
+.target-header p {
+    margin: 10px 0 0;
+    color: #8d9098;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.company-count {
+    min-width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.company-count strong {
+    color: #f0f0f1;
+    font-size: 30px;
+    line-height: 1;
+}
+
+.company-count span {
+    margin-top: 5px;
+    color: #686b72;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.target-message {
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    border-radius: 9px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.target-message.error {
+    border: 1px solid #522b2b;
+    background: #211416;
+    color: #e58c8c;
+}
+
+.target-message.success {
+    border: 1px solid #354a37;
+    background: #151d17;
+    color: #8fc494;
+}
+
+
+/* =========================================================
+   ADD CARD
+========================================================= */
+
+.target-add-card {
+    margin-bottom: 28px;
+    padding: 26px;
+
+    border: 1px solid #282828;
+    border-radius: 16px;
+
+    background: #0a0a0a;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.target-add-card:hover {
+    background: #0e0e0e;
+    border-color: #30323a;
+}
+
+.target-card-heading {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #202126;
+}
+
+.target-section-label {
+    margin-bottom: 8px;
+    color: #ff7a18;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+
+.target-card-heading h2,
+.target-list-header h2 {
+    margin: 0;
+    color: #eeeeef;
+    font-size: 19px;
+    font-weight: 650;
+}
+
+.target-card-heading p {
+    margin: 7px 0 0;
+    color: #858890;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   ADD FORM
+========================================================= */
+
+.target-add-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 150px auto;
+    align-items: end;
+    gap: 14px;
+    padding-top: 22px;
+}
+
+.target-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.target-form-field label {
+    color: #d7d8da;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.target-form-field input,
+.target-form-field select,
+.target-edit-form input,
+.target-edit-form select {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #292b30;
+    border-radius: 9px;
+    outline: none;
+
+    background: #111214;
+    color: #eeeeef;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+.target-form-field input::placeholder {
+    color: #55585f;
+}
+
+.target-form-field input:focus,
+.target-form-field select:focus,
+.target-edit-form input:focus,
+.target-edit-form select:focus {
+    border-color: #ff7a18;
+    background: #131416;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.target-primary-button {
+    height: 44px;
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #ff7a18;
+    color: #111214;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 650;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+}
+
+.target-primary-button:hover {
+    background: #ff8b32;
+    transform: translateY(-1px);
+}
+
+.target-primary-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =========================================================
+   LIST HEADER
+========================================================= */
+
+.target-list-section {
+    width: 100%;
+}
+
+.target-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.target-total {
+    min-width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #2a2c31;
+    border-radius: 8px;
+
+    background: #0a0a0a;
+    color: #c8c9cc;
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.target-empty {
+    padding: 55px 25px;
+
+    border: 1px dashed #2b2d32;
+    border-radius: 14px;
+
+    background: #0a0a0a;
+
+    text-align: center;
+}
+
+.target-empty-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 14px;
+
+    border: 1px solid #2c2e33;
+    border-radius: 12px;
+
+    background: #151619;
+    color: #ff7a18;
+
+    font-size: 20px;
+}
+
+.target-empty h3 {
+    margin: 0 0 7px;
+    color: #e5e5e7;
+    font-size: 15px;
+}
+
+.target-empty p {
+    max-width: 400px;
+    margin: 0 auto;
+
+    color: #777a82;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   COMPANY LIST
+========================================================= */
+
+.target-company-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.target-company-row {
+    min-height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+    padding: 14px 16px;
+
+    border: 1px solid #282828;
+    border-radius: 16px;
+
+    background: #0a0a0a;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+.target-company-row:hover {
+    border-color: #30323a;
+    background: #0e0e0e;
+}
+
+
+/* =========================================================
+   COMPANY
+========================================================= */
+
+.target-company-main {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+.company-avatar {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: 1px solid #2c2e33;
+    border-radius: 10px;
+
+    background: #151619;
+    color: #ff7a18;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.target-company-main strong {
+    display: block;
+    overflow: hidden;
+
+    color: #e8e8e9;
+    font-size: 14px;
+    font-weight: 650;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.target-company-main span {
+    display: block;
+    margin-top: 4px;
+
+    color: #676a72;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   COMPANY RIGHT
+========================================================= */
+
+.target-company-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   PRIORITY
+========================================================= */
+
+.priority-badge {
+    min-width: 78px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 650;
+}
+
+.priority-1 {
+    border: 1px solid rgba(255, 122, 24, 0.35);
+    background: rgba(255, 122, 24, 0.10);
+    color: #ff9a4a;
+}
+
+.priority-2 {
+    border: 1px solid #45412c;
+    background: #1a1912;
+    color: #d5bd69;
+}
+
+.priority-3 {
+    border: 1px solid #34373a;
+    background: #151719;
+    color: #9da0a5;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.target-action-button {
+    height: 32px;
+    padding: 0 11px;
+
+    border: 1px solid #2a2c31;
+    border-radius: 7px;
+
+    background: #151619;
+    color: #c9cace;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+.target-action-button:hover {
+    border-color: #3b3d43;
+    background: #1b1d21;
+}
+
+.target-action-button.delete {
+    color: #d98989;
+}
+
+.target-action-button.delete:hover {
+    border-color: #593232;
+    background: #211516;
+}
+
+
+/* =========================================================
+   EDIT FORM
+========================================================= */
+
+.target-edit-form {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 120px auto auto;
+
+    align-items: center;
+    gap: 9px;
+}
+
+.target-edit-form input,
+.target-edit-form select {
+    height: 38px;
+}
+
+.target-save-button,
+.target-cancel-button {
+    height: 38px;
+    padding: 0 12px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.target-save-button {
+    border: none;
+    background: #ff7a18;
+    color: #111214;
+}
+
+.target-save-button:hover {
+    background: #ff8b32;
+}
+
+.target-cancel-button {
+    border: 1px solid #2a2c31;
+    background: #151619;
+    color: #c9cace;
+}
+
+.target-cancel-button:hover {
+    background: #1b1d21;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.target-loading {
+    min-height: 400px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #777a82;
+}
+
+.target-loading-spinner {
+    width: 26px;
+    height: 26px;
+
+    margin-bottom: 14px;
+
+    border: 2px solid #2b2d31;
+    border-top-color: #ff7a18;
+
+    border-radius: 50%;
+
+    animation: target-spin 0.8s linear infinite;
+}
+
+.target-loading p {
+    margin: 0;
+    font-size: 12px;
+}
+
+@keyframes target-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .target-companies-page {
+        padding: 28px 20px 45px;
+    }
+
+    .target-header {
+        align-items: flex-start;
+    }
+
+    .target-add-form {
+        grid-template-columns: 1fr;
+    }
+
+    .target-primary-button {
+        width: 100%;
+    }
+
+    .target-company-row {
+        align-items: flex-start;
+    }
+
+    .target-company-right {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .target-edit-form {
+        grid-template-columns: 1fr 100px;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .target-header {
+        flex-direction: column;
+    }
+
+    .company-count {
+        align-items: flex-start;
+    }
+
+    .target-company-row {
+        flex-direction: column;
+    }
+
+    .target-company-main {
+        width: 100%;
+    }
+
+    .target-company-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .target-edit-form {
+        grid-template-columns: 1fr;
+    }
+}
