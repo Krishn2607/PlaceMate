@@ -9,6 +9,8 @@ import { Sparkles } from "lucide-react";
 
 import { useAuth } from "../context/AuthContext";
 
+import "./Login.css";
+
 
 function Login() {
 
@@ -102,12 +104,9 @@ function Login() {
         setError("");
 
 
-        // ======================================
-        // FRONTEND VALIDATION
-        // ======================================
-
         const validationError =
             validateForm();
+
 
         if (validationError) {
 
@@ -154,116 +153,322 @@ function Login() {
 
     return (
 
-        <div className="auth-page">
+        <div className="login-page">
 
-            <div className="auth-card">
+            {/* ==========================================
+                BACKGROUND
+            ========================================== */}
 
-                <div className="auth-logo">
-                    <Sparkles size={22} />
-                </div>
+            <div className="login-background-glow" />
 
-
-                <div className="eyebrow">
-                    PLACEMENT OS
-                </div>
+            <div className="login-background-grid" />
 
 
-                <h1>
-                    Welcome back.
-                </h1>
+            {/* ==========================================
+                NAVIGATION
+            ========================================== */}
+
+            <header className="login-header">
+
+                <Link
+                    to="/"
+                    className="login-brand"
+                >
+
+                    <div className="login-brand-mark">
+                        ✦
+                    </div>
+
+                    <div>
+                        <strong>
+                            PlaceMate
+                        </strong>
+
+                        <span>
+                            PLACEMENT OS
+                        </span>
+                    </div>
+
+                </Link>
 
 
-                <p>
-                    Continue building your placement profile.
-                </p>
+                <Link
+                    to="/register"
+                    className="login-register-link"
+                >
+                    Create account
+                    <span>→</span>
+                </Link>
+
+            </header>
 
 
-                <form onSubmit={handleSubmit}>
+            {/* ==========================================
+                MAIN
+            ========================================== */}
 
+            <main className="login-main">
 
-                    {/* EMAIL */}
+                {/* ======================================
+                    LEFT CONTENT
+                ====================================== */}
 
-                    <div className="input-group">
+                <section className="login-story">
 
-                        <label>
-                            Email
-                        </label>
+                    <div className="login-eyebrow">
+                        <span className="login-eyebrow-dot" />
 
-
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={handleEmailChange}
-                            placeholder="Enter your email"
-                            autoComplete="email"
-                            disabled={loading}
-                        />
-
+                        YOUR PREPARATION.
+                        YOUR PROGRESS.
                     </div>
 
 
-                    {/* PASSWORD */}
+                    <h1>
+                        Welcome back.
+                        <br />
 
-                    <div className="input-group">
-
-                        <label>
-                            Password
-                        </label>
-
-
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={handlePasswordChange}
-                            placeholder="Enter your password"
-                            autoComplete="current-password"
-                            disabled={loading}
-                        />
-
-                    </div>
+                        <span>
+                            Keep building.
+                        </span>
+                    </h1>
 
 
-                    {/* ERROR */}
+                    <p className="login-story-description">
+                        Continue building your placement profile,
+                        tracking your preparation and turning
+                        consistent work into interview confidence.
+                    </p>
 
-                    {error && (
 
-                        <div className="form-error">
-                            {error}
+                    <div className="login-story-points">
+
+                        <div>
+                            <span>
+                                01
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Track your preparation
+                                </strong>
+
+                                <p>
+                                    Keep coding, projects, skills,
+                                    resumes and certifications together.
+                                </p>
+                            </div>
                         </div>
 
-                    )}
+
+                        <div>
+                            <span>
+                                02
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Understand your progress
+                                </strong>
+
+                                <p>
+                                    See the signals that matter for
+                                    your placement preparation.
+                                </p>
+                            </div>
+                        </div>
 
 
-                    {/* SUBMIT */}
+                        <div>
+                            <span>
+                                03
+                            </span>
 
-                    <button
-                        type="submit"
-                        className="primary-button full-width"
-                        disabled={loading}
+                            <div>
+                                <strong>
+                                    Know what comes next
+                                </strong>
+
+                                <p>
+                                    Use plans and progress insights
+                                    to keep moving consistently.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                {/* ======================================
+                    LOGIN CARD
+                ====================================== */}
+
+                <section className="login-card">
+
+                    <div className="login-card-top">
+
+                        <div className="login-icon">
+                            <Sparkles size={20} />
+                        </div>
+
+
+                        <div className="login-card-label">
+                            PLACE MATE
+                        </div>
+
+                    </div>
+
+
+                    <div className="login-card-heading">
+
+                        <h2>
+                            Sign in
+                        </h2>
+
+                        <p>
+                            Continue where you left off.
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        onSubmit={handleSubmit}
+                        className="login-form"
                     >
 
-                        {loading
-                            ? "Signing in..."
-                            : "Sign in"}
+                        {/* EMAIL */}
 
-                    </button>
+                        <div className="login-input-group">
 
-                </form>
+                            <label>
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={
+                                    handleEmailChange
+                                }
+                                placeholder="Enter your email"
+                                autoComplete="email"
+                                disabled={loading}
+                            />
+
+                        </div>
 
 
-                {/* REGISTER */}
+                        {/* PASSWORD */}
 
-                <div className="auth-footer">
+                        <div className="login-input-group">
 
-                    Don't have an account?{" "}
+                            <div className="login-label-row">
 
-                    <Link to="/register">
-                        Create one
-                    </Link>
+                                <label>
+                                    Password
+                                </label>
 
-                </div>
+                            </div>
 
-            </div>
+
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={
+                                    handlePasswordChange
+                                }
+                                placeholder="Enter your password"
+                                autoComplete="current-password"
+                                disabled={loading}
+                            />
+
+                        </div>
+
+
+                        {/* ERROR */}
+
+                        {error && (
+
+                            <div className="login-error">
+
+                                <span>
+                                    !
+                                </span>
+
+                                <p>
+                                    {error}
+                                </p>
+
+                            </div>
+
+                        )}
+
+
+                        {/* SUBMIT */}
+
+                        <button
+                            type="submit"
+                            className="login-submit"
+                            disabled={loading}
+                        >
+
+                            <span>
+                                {loading
+                                    ? "Signing in..."
+                                    : "Sign in to PlaceMate"}
+                            </span>
+
+                            {!loading && (
+                                <span className="login-submit-arrow">
+                                    →
+                                </span>
+                            )}
+
+                        </button>
+
+                    </form>
+
+
+                    {/* FOOTER */}
+
+                    <div className="login-card-footer">
+
+                        <span>
+                            Don't have an account?
+                        </span>
+
+                        <Link to="/register">
+                            Create one
+                        </Link>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+
+            {/* ==========================================
+                BOTTOM
+            ========================================== */}
+
+            <footer className="login-footer">
+
+                <span>
+                    © PlaceMate
+                </span>
+
+                <span className="login-footer-divider">
+                    /
+                </span>
+
+                <span>
+                    Placement preparation workspace
+                </span>
+
+            </footer>
 
         </div>
     );

@@ -1,0 +1,1082 @@
+/* =========================================================
+   REGISTER PAGE
+========================================================= */
+
+.register-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(255, 122, 24, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(255, 122, 24, 0.05),
+      transparent 30%
+    ),
+    #0d0d0d;
+
+  color: #f5f5f5;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.register-grid {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.25;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 55px 55px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 90%
+  );
+}
+
+
+.register-glow {
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 122, 24, 0.08);
+
+  filter: blur(100px);
+
+  pointer-events: none;
+}
+
+
+.register-glow-top {
+  top: -240px;
+  left: -180px;
+}
+
+
+.register-glow-bottom {
+  bottom: -260px;
+  right: -160px;
+}
+
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.register-container {
+  position: relative;
+  z-index: 2;
+
+  width: min(1120px, calc(100% - 48px));
+
+  margin: auto;
+
+  padding: 70px 0 90px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    470px;
+
+  align-items: center;
+
+  gap: 90px;
+}
+
+
+
+/* =========================================================
+   LEFT — PRODUCT SECTION
+========================================================= */
+
+.register-product {
+  position: relative;
+
+  max-width: 560px;
+}
+
+
+.register-product::after {
+  content: "";
+
+  position: absolute;
+
+  top: 90px;
+  right: -45px;
+
+  width: 1px;
+  height: 360px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 122, 24, 0.45),
+      transparent
+    );
+}
+
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.register-brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  margin-bottom: 58px;
+}
+
+
+.register-brand-mark {
+  width: 39px;
+  height: 39px;
+
+  border-radius: 11px;
+
+  background: #ff7a18;
+
+  color: #111;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 8px 30px rgba(255, 122, 24, 0.18);
+}
+
+
+.register-brand-name {
+  font-size: 16px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.2px;
+}
+
+
+.register-brand-subtitle {
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  color: #777;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1.2px;
+}
+
+
+
+/* =========================================================
+   PRODUCT EYEBROW
+========================================================= */
+
+.register-product-eyebrow {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 18px;
+
+  color: #999;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.7px;
+}
+
+
+.register-product-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #ff7a18;
+
+  box-shadow:
+    0 0 12px rgba(255, 122, 24, 0.7);
+}
+
+
+
+/* =========================================================
+   PRODUCT TITLE
+========================================================= */
+
+.register-product-title {
+  margin: 0;
+
+  max-width: 620px;
+
+  font-size: clamp(
+    42px,
+    5vw,
+    66px
+  );
+
+  line-height: 1.02;
+
+  letter-spacing: -3.2px;
+
+  font-weight: 700;
+
+  color: #f4f4f4;
+}
+
+
+.register-product-title span {
+  color: #ff7a18;
+}
+
+
+
+/* =========================================================
+   PRODUCT DESCRIPTION
+========================================================= */
+
+.register-product-description {
+  max-width: 520px;
+
+  margin: 25px 0 0;
+
+  color: #8d8d8d;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+}
+
+
+
+/* =========================================================
+   PRODUCT FEATURES
+========================================================= */
+
+.register-product-features {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-top: 38px;
+
+  max-width: 520px;
+}
+
+
+.register-product-feature {
+  min-height: 92px;
+
+  padding: 15px;
+
+  border: 1px solid #252525;
+
+  border-radius: 13px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.register-product-feature:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(255, 122, 24, 0.35);
+
+  background:
+    rgba(255, 122, 24, 0.035);
+}
+
+
+.register-feature-icon {
+  width: 27px;
+  height: 27px;
+
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    rgba(255, 122, 24, 0.1);
+
+  color: #ff7a18;
+}
+
+
+.register-product-feature strong {
+  display: block;
+
+  margin-top: 12px;
+
+  color: #e8e8e8;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+.register-product-feature span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #666;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+}
+
+
+
+/* =========================================================
+   PRODUCT NOTE
+========================================================= */
+
+.register-product-note {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: 27px;
+
+  color: #666;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+.register-product-note svg {
+  flex-shrink: 0;
+
+  color: #ff7a18;
+}
+
+
+
+/* =========================================================
+   REGISTER CARD
+========================================================= */
+
+.register-card {
+  position: relative;
+
+  padding: 38px;
+
+  border: 1px solid #292929;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(20px);
+}
+
+
+.register-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 40px;
+  right: 40px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 122, 24, 0.7),
+      transparent
+    );
+}
+
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.register-card-header {
+  margin-bottom: 30px;
+}
+
+
+.register-eyebrow {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 14px;
+
+  color: #777;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.6px;
+}
+
+
+.register-eyebrow-dot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #ff7a18;
+}
+
+
+.register-card-header h2 {
+  margin: 0;
+
+  color: #f2f2f2;
+
+  font-size: 28px;
+
+  line-height: 1.15;
+
+  letter-spacing: -1.2px;
+}
+
+
+.register-card-header h2 span {
+  color: #ff7a18;
+}
+
+
+.register-card-header p {
+  margin: 12px 0 0;
+
+  color: #777;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.register-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 19px;
+}
+
+
+.register-field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+
+.register-field label {
+  color: #bcbcbc;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+.register-field input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  height: 46px;
+
+  padding: 0 14px;
+
+  border: 1px solid #2b2b2b;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #111;
+
+  color: #eee;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.register-field input::placeholder {
+  color: #4f4f4f;
+}
+
+
+.register-field input:hover {
+  border-color: #373737;
+}
+
+
+.register-field input:focus {
+  border-color: #ff7a18;
+
+  background: #121212;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 122, 24, 0.08);
+}
+
+
+.register-field small {
+  margin-top: -2px;
+
+  color: #555;
+
+  font-size: 9px;
+}
+
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.register-error {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 10px 12px;
+
+  border: 1px solid rgba(255, 75, 75, 0.25);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 60, 60, 0.06);
+
+  color: #ff8585;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+
+.register-error span {
+  width: 17px;
+  height: 17px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    rgba(255, 80, 80, 0.15);
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.register-submit {
+  width: 100%;
+
+  height: 48px;
+
+  margin-top: 2px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #ff7a18;
+
+  color: #111;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.register-submit:hover:not(:disabled) {
+  background: #ff8b36;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 30px rgba(255, 122, 24, 0.18);
+}
+
+
+.register-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+
+.register-submit:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.register-benefits {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px 18px;
+
+  margin-top: 22px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #242424;
+}
+
+
+.register-benefit {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #696969;
+
+  font-size: 9px;
+}
+
+
+.register-check {
+  width: 16px;
+  height: 16px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    rgba(255, 122, 24, 0.1);
+
+  color: #ff7a18;
+}
+
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.register-footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin-top: 28px;
+
+  color: #5d5d5d;
+
+  font-size: 10px;
+}
+
+
+.register-footer a {
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  color: #ff7a18;
+
+  text-decoration: none;
+
+  font-weight: 600;
+
+  transition:
+    color 0.2s ease;
+}
+
+
+.register-footer a:hover {
+  color: #ff9a55;
+}
+
+
+
+/* =========================================================
+   PAGE FOOTER
+========================================================= */
+
+.register-page-footer {
+  position: absolute;
+
+  z-index: 3;
+
+  bottom: 22px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  white-space: nowrap;
+
+  color: #3f3f3f;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+}
+
+
+.register-page-footer span:first-child {
+  color: #666;
+}
+
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 950px) {
+
+  .register-container {
+    grid-template-columns: 1fr;
+
+    max-width: 650px;
+
+    gap: 55px;
+
+    padding-top: 50px;
+    padding-bottom: 80px;
+  }
+
+
+  .register-product {
+    max-width: 650px;
+  }
+
+
+  .register-product::after {
+    display: none;
+  }
+
+
+  .register-brand {
+    margin-bottom: 42px;
+  }
+
+
+  .register-product-title {
+    font-size: clamp(
+      40px,
+      8vw,
+      58px
+    );
+  }
+
+
+  .register-product-description {
+    max-width: 600px;
+  }
+
+
+  .register-product-features {
+    max-width: 600px;
+  }
+
+
+  .register-card {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+}
+
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .register-container {
+    width: min(
+      100% - 30px,
+      470px
+    );
+
+    padding-top: 30px;
+
+    gap: 40px;
+  }
+
+
+  .register-brand {
+    margin-bottom: 34px;
+  }
+
+
+  .register-product-title {
+    font-size: 39px;
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+  }
+
+
+  .register-product-description {
+    margin-top: 18px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+  }
+
+
+  .register-product-features {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+    margin-top: 26px;
+  }
+
+
+  .register-product-feature {
+    min-height: auto;
+
+    padding: 13px;
+
+    display: grid;
+
+    grid-template-columns: 30px 1fr;
+
+    align-items: center;
+
+    column-gap: 10px;
+  }
+
+
+  .register-product-feature strong {
+    margin-top: 0;
+  }
+
+
+  .register-product-feature span {
+    font-size: 9px;
+  }
+
+
+  .register-feature-icon {
+    grid-row: span 2;
+  }
+
+
+  .register-product-note {
+    margin-top: 20px;
+  }
+
+
+  .register-card {
+    padding: 27px 22px;
+
+    border-radius: 16px;
+  }
+
+
+  .register-card-header h2 {
+    font-size: 25px;
+  }
+
+
+  .register-page-footer {
+    display: none;
+  }
+
+}
+
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .register-container {
+    width: calc(100% - 22px);
+
+    padding-top: 22px;
+  }
+
+
+  .register-product-title {
+    font-size: 34px;
+
+    letter-spacing: -1.7px;
+  }
+
+
+  .register-product-eyebrow {
+    font-size: 8px;
+
+    letter-spacing: 1.3px;
+  }
+
+
+  .register-card {
+    padding: 24px 18px;
+  }
+
+
+  .register-benefits {
+    flex-direction: column;
+
+    gap: 9px;
+  }
+
+}

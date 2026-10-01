@@ -30,3 +30,24 @@ export const updateProfile = async (
 
     return response.data;
 };
+
+
+// ==========================================
+// CHANGE CURRENT STUDENT PASSWORD
+// ==========================================
+
+export const changePassword = async (
+    currentPassword,
+    newPassword
+) => {
+
+    const response = await api.put(
+        "/students/change-password",
+        {
+            currentPassword,
+            newPassword
+        }
+    );
+
+    return response.data;
+};

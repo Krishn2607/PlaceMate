@@ -247,7 +247,7 @@ a {
 
   border-radius: 11px;
 
-  background: var(--orange);
+  background: #ff7a18;
 
   color: #111;
 
@@ -293,7 +293,7 @@ a {
   background: linear-gradient(
     135deg,
     #eee 50%,
-    var(--orange) 50%
+    #ff7a18 50%
   );
 
   color: #222;

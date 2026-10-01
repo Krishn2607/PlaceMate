@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { changePassword } from "../services/profileService";
+
 import "./Settings.css";
 
 
@@ -8,20 +10,24 @@ function Settings() {
 
     const navigate = useNavigate();
 
+
     const [
         showCurrentPassword,
         setShowCurrentPassword
     ] = useState(false);
+
 
     const [
         showNewPassword,
         setShowNewPassword
     ] = useState(false);
 
+
     const [
         showConfirmPassword,
         setShowConfirmPassword
     ] = useState(false);
+
 
     const [
         form,
@@ -32,10 +38,12 @@ function Settings() {
         confirmPassword: ""
     });
 
+
     const [
         message,
         setMessage
     ] = useState("");
+
 
     const [
         messageType,
@@ -50,23 +58,30 @@ function Settings() {
             value
         } = event.target;
 
+
         setForm(previous => ({
             ...previous,
             [name]: value
         }));
+
 
         setMessage("");
         setMessageType("");
     };
 
 
-    const handlePasswordSubmit = (event) => {
+    const handlePasswordSubmit = async (event) => {
 
         event.preventDefault();
+
 
         setMessage("");
         setMessageType("");
 
+
+        // ==========================================
+        // CURRENT PASSWORD VALIDATION
+        // ==========================================
 
         if (!form.currentPassword) {
 
@@ -79,6 +94,10 @@ function Settings() {
             return;
         }
 
+
+        // ==========================================
+        // NEW PASSWORD VALIDATION
+        // ==========================================
 
         if (!form.newPassword) {
 
@@ -103,6 +122,10 @@ function Settings() {
             return;
         }
 
+
+        // ==========================================
+        // CONFIRM PASSWORD VALIDATION
+        // ==========================================
 
         if (!form.confirmPassword) {
 
@@ -131,6 +154,10 @@ function Settings() {
         }
 
 
+        // ==========================================
+        // SAME PASSWORD VALIDATION
+        // ==========================================
+
         if (
             form.currentPassword ===
             form.newPassword
@@ -146,18 +173,49 @@ function Settings() {
         }
 
 
-        /*
-         * FRONTEND ONLY FOR NOW
-         *
-         * Backend password API will be
-         * connected in the next step.
-         */
+        // ==========================================
+        // CHANGE PASSWORD
+        // ==========================================
 
-        setMessage(
-            "Password form is valid. Backend connection will be added next."
-        );
+        try {
 
-        setMessageType("success");
+            const response = await changePassword(
+                form.currentPassword,
+                form.newPassword
+            );
+
+
+            setMessage(
+                response.message ||
+                "Password changed successfully."
+            );
+
+            setMessageType("success");
+
+
+            // Clear password fields after success
+            setForm({
+                currentPassword: "",
+                newPassword: "",
+                confirmPassword: ""
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Change password error:",
+                error
+            );
+
+
+            setMessage(
+                error.response?.data?.message ||
+                "Failed to change password. Please try again."
+            );
+
+            setMessageType("error");
+        }
 
     };
 
@@ -223,6 +281,7 @@ function Settings() {
 
                         </div>
 
+
                         <button
                             type="button"
                             className="settings-secondary-button"
@@ -231,7 +290,11 @@ function Settings() {
                             }
                         >
                             Open Profile
-                            <span>→</span>
+
+                            <span>
+                                →
+                            </span>
+
                         </button>
 
                     </div>
@@ -301,6 +364,7 @@ function Settings() {
                         className="password-form"
                         onSubmit={handlePasswordSubmit}
                     >
+
 
                         {/* CURRENT PASSWORD */}
 
@@ -484,9 +548,11 @@ function Settings() {
 
                         </div>
 
+
                     </form>
 
                 </section>
+
 
             </div>
 

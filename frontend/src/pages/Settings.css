@@ -1,15 +1,22 @@
+/* =========================================================
+   SETTINGS PAGE
+========================================================= */
+
 .settings-page {
     width: 100%;
     max-width: 1100px;
+
     margin: 0 auto;
+
     padding: 36px 40px 60px;
+
     box-sizing: border-box;
 }
 
 
-/* ==========================================
+/* =========================================================
    HEADER
-========================================== */
+========================================================= */
 
 .settings-header {
     margin-bottom: 30px;
@@ -17,55 +24,79 @@
 
 .settings-eyebrow {
     margin-bottom: 10px;
-    color: #e89443;
+
+    color: #ff7a18;
+
     font-size: 11px;
     font-weight: 700;
+
     letter-spacing: 0.16em;
 }
 
 .settings-header h1 {
     margin: 0;
+
     color: #f4f4f5;
+
     font-size: 34px;
     line-height: 1.15;
+
     font-weight: 700;
 }
 
 .settings-header p {
     margin: 10px 0 0;
+
     color: #8d9098;
+
     font-size: 14px;
     line-height: 1.6;
 }
 
 
-/* ==========================================
+/* =========================================================
    LAYOUT
-========================================== */
+========================================================= */
 
 .settings-layout {
     display: flex;
     flex-direction: column;
+
     gap: 18px;
 }
 
 
-/* ==========================================
+/* =========================================================
    TOP SETTINGS CARDS
-========================================== */
+========================================================= */
 
 .settings-card {
     display: flex;
     align-items: flex-start;
+
     gap: 18px;
 
     padding: 24px;
 
-    border: 1px solid #222429;
+    border: 1px solid #282828;
     border-radius: 14px;
 
-    background: #0d0e10;
+    background: #0a0a0a;
+
     box-sizing: border-box;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.settings-card:hover {
+    background: #0e0e0e;
+
+    border-color: #343434;
+
+    transform: translateY(-1px);
 }
 
 .settings-card-icon {
@@ -78,12 +109,13 @@
 
     flex-shrink: 0;
 
-    border: 1px solid #2c2e33;
+    border: 1px solid #282828;
     border-radius: 11px;
 
-    background: #151619;
+    background: #111111;
 
-    color: #e89443;
+    color: #ff7a18;
+
     font-size: 19px;
 }
 
@@ -93,6 +125,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 24px;
 }
 
@@ -100,6 +133,7 @@
     margin: 0 0 6px;
 
     color: #eeeeef;
+
     font-size: 17px;
     font-weight: 650;
 }
@@ -108,21 +142,22 @@
     margin: 0;
 
     color: #858890;
+
     font-size: 13px;
     line-height: 1.55;
 }
 
 
-/* ==========================================
+/* =========================================================
    BUTTONS
-========================================== */
+========================================================= */
 
 .settings-secondary-button,
 .settings-primary-button {
-    border: none;
     border-radius: 9px;
 
     font-family: inherit;
+
     font-size: 13px;
     font-weight: 600;
 
@@ -131,63 +166,88 @@
     transition:
         background 0.18s ease,
         border-color 0.18s ease,
+        color 0.18s ease,
         transform 0.18s ease;
 }
+
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
 
 .settings-secondary-button {
     display: flex;
     align-items: center;
+
     gap: 9px;
 
     flex-shrink: 0;
 
     padding: 10px 14px;
 
-    border: 1px solid #2a2c31;
+    border: 1px solid #282828;
 
-    background: #151619;
+    background: #0a0a0a;
+
     color: #d9dadd;
 }
 
 .settings-secondary-button:hover {
-    background: #1b1d21;
-    border-color: #3a3c42;
+    background: #0e0e0e;
+
+    border-color: #3a3a3a;
+
+    color: #ffffff;
 }
 
 .settings-secondary-button span {
-    color: #e89443;
+    color: #ff7a18;
+
     font-size: 16px;
 }
 
 
-/* ==========================================
+/* =========================================================
    PASSWORD CARD
-========================================== */
+========================================================= */
 
 .password-card {
     margin-top: 2px;
 
     padding: 28px;
 
-    border: 1px solid #222429;
+    border: 1px solid #282828;
     border-radius: 14px;
 
-    background: #0d0e10;
+    background: #0a0a0a;
+
     box-sizing: border-box;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.password-card:hover {
+    background: #0e0e0e;
+
+    border-color: #343434;
 }
 
 .password-card-header {
     padding-bottom: 22px;
 
-    border-bottom: 1px solid #202126;
+    border-bottom: 1px solid #282828;
 }
 
 .settings-section-label {
     margin-bottom: 8px;
 
-    color: #e89443;
+    color: #ff7a18;
+
     font-size: 10px;
     font-weight: 700;
+
     letter-spacing: 0.15em;
 }
 
@@ -195,6 +255,7 @@
     margin: 0 0 7px;
 
     color: #f0f0f1;
+
     font-size: 20px;
     font-weight: 650;
 }
@@ -203,20 +264,22 @@
     margin: 0;
 
     color: #858890;
+
     font-size: 13px;
     line-height: 1.55;
 }
 
 
-/* ==========================================
+/* =========================================================
    FORM
-========================================== */
+========================================================= */
 
 .password-form {
     max-width: 620px;
 
     display: flex;
     flex-direction: column;
+
     gap: 20px;
 
     padding-top: 24px;
@@ -225,24 +288,27 @@
 .password-field {
     display: flex;
     flex-direction: column;
+
     gap: 8px;
 }
 
 .password-field label {
     color: #d7d8da;
+
     font-size: 13px;
     font-weight: 600;
 }
 
 .password-field small {
     color: #686b72;
+
     font-size: 11px;
 }
 
 
-/* ==========================================
+/* =========================================================
    PASSWORD INPUT
-========================================== */
+========================================================= */
 
 .password-input-wrapper {
     position: relative;
@@ -259,12 +325,12 @@
 
     box-sizing: border-box;
 
-    border: 1px solid #292b30;
+    border: 1px solid #282828;
     border-radius: 9px;
 
     outline: none;
 
-    background: #111214;
+    background: #0e0e0e;
     color: #eeeeef;
 
     font-family: inherit;
@@ -272,7 +338,12 @@
 
     transition:
         border-color 0.18s ease,
-        background 0.18s ease;
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.password-input-wrapper input:hover {
+    border-color: #343434;
 }
 
 .password-input-wrapper input::placeholder {
@@ -280,30 +351,45 @@
 }
 
 .password-input-wrapper input:focus {
-    border-color: #e89443;
-    background: #131416;
+    border-color: #ff7a18;
+
+    background: #111111;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(255, 122, 24, 0.08);
 }
 
 .password-toggle {
     position: absolute;
+
     right: 10px;
 
     border: none;
+
     background: transparent;
 
-    color: #e89443;
+    color: #ff7a18;
 
     font-family: inherit;
+
     font-size: 11px;
     font-weight: 600;
 
     cursor: pointer;
+
+    transition:
+        color 0.18s ease;
+}
+
+.password-toggle:hover {
+    color: #ff8b32;
 }
 
 
-/* ==========================================
+/* =========================================================
    MESSAGE
-========================================== */
+========================================================= */
 
 .settings-message {
     padding: 12px 14px;
@@ -316,23 +402,28 @@
 
 .settings-message.error {
     border: 1px solid #522b2b;
+
     background: #211416;
+
     color: #e58c8c;
 }
 
 .settings-message.success {
     border: 1px solid #354a37;
+
     background: #151d17;
+
     color: #8fc494;
 }
 
 
-/* ==========================================
+/* =========================================================
    FORM ACTIONS
-========================================== */
+========================================================= */
 
 .password-form-actions {
     display: flex;
+
     justify-content: flex-start;
 
     padding-top: 2px;
@@ -341,19 +432,33 @@
 .settings-primary-button {
     padding: 11px 18px;
 
-    background: #e89443;
+    border: 1px solid #ff7a18;
+
+    background: #ff7a18;
+
     color: #111214;
 }
 
 .settings-primary-button:hover {
-    background: #f0a055;
+    border-color: #ff8b32;
+
+    background: #ff8b32;
+
     transform: translateY(-1px);
 }
 
+.settings-primary-button:disabled {
+    opacity: 0.55;
 
-/* ==========================================
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
    RESPONSIVE
-========================================== */
+========================================================= */
 
 @media (max-width: 700px) {
 
@@ -361,23 +466,30 @@
         padding: 28px 20px 45px;
     }
 
+
     .settings-header h1 {
         font-size: 28px;
     }
+
 
     .settings-card {
         padding: 20px;
     }
 
+
     .settings-card-content {
         flex-direction: column;
+
         align-items: flex-start;
     }
 
+
     .settings-secondary-button {
         width: 100%;
+
         justify-content: center;
     }
+
 
     .password-card {
         padding: 20px;
