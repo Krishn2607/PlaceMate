@@ -9,6 +9,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardLayout from "./layouts/DashboardLayout";
 
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Skills from "./pages/Skills";
@@ -19,7 +20,6 @@ import Resumes from "./pages/Resumes";
 import WeeklyPlan from "./pages/WeeklyPlan";
 import Progress from "./pages/Progress";
 import Readiness from "./pages/Readiness";
-import AboutPlaceMate from "./pages/AboutPlaceMate";
 import Settings from "./pages/Settings";
 import TargetCompanies from "./pages/TargetCompanies";
 
@@ -37,7 +37,14 @@ function App() {
 
                 <Routes>
 
-                    {/* Public Routes */}
+                    {/* =========================================
+                        PUBLIC ROUTES
+                    ========================================= */}
+
+                    <Route
+                        path="/"
+                        element={<Home />}
+                    />
 
                     <Route
                         path="/login"
@@ -50,7 +57,9 @@ function App() {
                     />
 
 
-                    {/* Protected Routes */}
+                    {/* =========================================
+                        PROTECTED ROUTES
+                    ========================================= */}
 
                     <Route
                         element={<ProtectedRoute />}
@@ -116,11 +125,6 @@ function App() {
                             />
 
                             <Route
-                                path="/about"
-                                element={<AboutPlaceMate />}
-                            />
-
-                            <Route
                                 path="/settings"
                                 element={<Settings />}
                             />
@@ -130,26 +134,15 @@ function App() {
                     </Route>
 
 
-                    {/* Default Route */}
-
-                    <Route
-                        path="/"
-                        element={
-                            <Navigate
-                                to="/dashboard"
-                                replace
-                            />
-                        }
-                    />
-
-
-                    {/* Unknown Routes */}
+                    {/* =========================================
+                        UNKNOWN ROUTES
+                    ========================================= */}
 
                     <Route
                         path="*"
                         element={
                             <Navigate
-                                to="/dashboard"
+                                to="/"
                                 replace
                             />
                         }
