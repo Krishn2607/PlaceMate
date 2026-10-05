@@ -2,7 +2,7 @@ import {
     BrowserRouter,
     Routes,
     Route,
-    Navigate,
+    Navigate
 } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -10,6 +10,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardLayout from "./layouts/DashboardLayout";
 
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Skills from "./pages/Skills";
@@ -20,26 +23,20 @@ import Resumes from "./pages/Resumes";
 import WeeklyPlan from "./pages/WeeklyPlan";
 import Progress from "./pages/Progress";
 import Readiness from "./pages/Readiness";
+import AboutPlaceMate from "./pages/AboutPlaceMate";
 import Settings from "./pages/Settings";
 import TargetCompanies from "./pages/TargetCompanies";
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-
-
 function App() {
-
     return (
-
         <BrowserRouter>
-
             <AuthProvider>
 
                 <Routes>
 
-                    {/* =========================================
+                    {/* ==========================================
                         PUBLIC ROUTES
-                    ========================================= */}
+                    ========================================== */}
 
                     <Route
                         path="/"
@@ -57,14 +54,13 @@ function App() {
                     />
 
 
-                    {/* =========================================
+                    {/* ==========================================
                         PROTECTED ROUTES
-                    ========================================= */}
+                    ========================================== */}
 
                     <Route
                         element={<ProtectedRoute />}
                     >
-
                         <Route
                             element={<DashboardLayout />}
                         >
@@ -124,39 +120,38 @@ function App() {
                                 element={<Progress />}
                             />
 
+                            {/* ==================================
+                                ABOUT PLACEMATE
+                            ================================== */}
+
+                            <Route
+                                path="/about"
+                                element={<AboutPlaceMate />}
+                            />
+
                             <Route
                                 path="/settings"
                                 element={<Settings />}
                             />
 
                         </Route>
-
                     </Route>
 
 
-                    {/* =========================================
-                        UNKNOWN ROUTES
-                    ========================================= */}
+                    {/* ==========================================
+                        FALLBACK
+                    ========================================== */}
 
                     <Route
                         path="*"
-                        element={
-                            <Navigate
-                                to="/"
-                                replace
-                            />
-                        }
+                        element={<Navigate to="/" replace />}
                     />
 
                 </Routes>
 
             </AuthProvider>
-
         </BrowserRouter>
-
     );
-
 }
-
 
 export default App;
