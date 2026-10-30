@@ -468,20 +468,6 @@ npm run build
 The frontend communicates with the deployed backend through its REST API.
 
 ---
-
-## Future Improvements
-
-Potential areas for further development include:
-
-- More detailed company-specific preparation insights.
-- Expanded skill-gap analysis.
-- Additional coding-platform integrations.
-- More advanced placement analytics.
-- Enhanced resume customization and recommendations.
-- Further improvements to AI-generated preparation guidance.
-
----
-
 ## Project Purpose
 
 PlaceMate aims to make placement preparation more structured and measurable.
